@@ -20004,25 +20004,30 @@
 			"name": "User-flow",
 			"item": [
 				{
-					"name": "Get medications relating to a patient - Patient Id",
+					"name": "As a patient I want to get all my prescription issue details",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"//As a user I want to order a repeat prescription. \r",
-									"//I first want to see all the medication statements associated with myself.\r",
-									"//The below will look at the first medication statement in the array of returned statements. It will then look at the basedOn.reference value and extract the medicationRequest id to use in the subsequent test \r",
-									"\r",
-									"//Verify the response status code\r",
-									"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
+									"//As a user, I would like to see all the prescription issue details for me. I would then like to select one that I can use to request a repeat prescription\r",
 									"\r",
 									"var jsonData = pm.response.json();\r",
-									"var reference = jsonData.entry[0].resource.basedOn[0].reference\r",
-									"var medicationRequestId = reference.substr(18, 36)\r",
-									"pm.collectionVariables.set('userFlowMedicationRequestId', medicationRequestId)"
+									"var arrayOfMedicationRequests = jsonData.entry\r",
+									"var arrayOfMedRequestIds = []\r",
+									"\r",
+									"//Select all the medication requests that have an intent of plan AND are of type continuous and save them into an array called arrayOfMedRequestIds\r",
+									"    arrayOfMedicationRequests.forEach((medicationRequest) => {\r",
+									"        if (medicationRequest.resource.intent === \"plan\" & (medicationRequest.resource.courseOfTherapyType.coding[0].code === \"continuous\" || medicationRequest.resource.courseOfTherapyType.coding[0].code === \"continuous-repeat-dispensing\")) {\r",
+									"            arrayOfMedRequestIds.push(medicationRequest.resource.id)\r",
+									"        }\r",
+									"    })\r",
+									"\r",
+									"//Select a random id from 'arrayOfMedRequestIds' and save it as the medication reuqest id to use in following tests\r",
+									"const random = Math.floor(Math.random() * arrayOfMedRequestIds.length);\r",
+									"pm.collectionVariables.set('userFlowMedicationRequestId', arrayOfMedRequestIds[random])\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -20056,22 +20061,22 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/Patient/{{userFlowPatientId}}/MedicationStatement",
+							"raw": "{{baseUrl}}/Patient/{{PatientId}}/MedicationRequest",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"Patient",
-								"{{userFlowPatientId}}",
-								"MedicationStatement"
+								"{{PatientId}}",
+								"MedicationRequest"
 							]
 						},
-						"description": "## Overview\n\nThis end point returns MedicationStatements relating to a patient, which show courses of medication prescribed to the patient.\n\nThese MedicationStatements must reference a MedicationRequest within the basedOn attribute: MedicationRequests provide details of specific prescriptions. The display within basedOn should quote the courseOfTherapyType from the referenced MedicationRequest, showing the prescription treatment type.\n\nThe referenced MedicationRequest must have intent set to plan.\n\nThe request must include the following parameter:\n\n* patient\n"
+						"description": "Use this endpoint to get details of previous prescription issues.\nThe request must include the following parameter:\n\n* patient\n\nThe request can optionally include include one of following parameters:\n\n* authoredon\n"
 					},
 					"response": []
 				},
 				{
-					"name": "Get a specific planned medication request",
+					"name": "I want to see one specific prescription from the previously returned list",
 					"event": [
 						{
 							"listen": "test",
@@ -20163,7 +20168,7 @@
 					"response": []
 				},
 				{
-					"name": "Get practitioner role details",
+					"name": "I want to see which practitioner issued that prescription",
 					"event": [
 						{
 							"listen": "test",
@@ -20230,7 +20235,7 @@
 					"response": []
 				},
 				{
-					"name": "Request a repeat prescription & new pharmacy",
+					"name": "From that medication request, I want to request a repeat prescription & to collect it from a new pharmacy",
 					"event": [
 						{
 							"listen": "test",
@@ -20311,7 +20316,7 @@
 					"response": []
 				},
 				{
-					"name": "Get requested prescription reorders: task id",
+					"name": "I want to see the status of the prescription request I just made",
 					"event": [
 						{
 							"listen": "test",
@@ -20389,7 +20394,7 @@
 					"response": []
 				},
 				{
-					"name": "Cancel an unactioned repeat prescription & new pharmacy request",
+					"name": "I want to cancel the prescription & new pharmacy request I just made",
 					"event": [
 						{
 							"listen": "test",
