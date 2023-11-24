@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "77c11c41-a294-4899-9d63-42c9f72504f5",
+		"_postman_id": "f4dbc084-9213-4ea9-97cf-f99a989046b0",
 		"name": "API Automation Test Framework for GP Connect Prescriptions Management FHIR API",
-		"description": "## End-to-end Overview\n\n<img src=\"https://raw.githubusercontent.com/NHSDigital/gp-connect-prescriptions-management-fhir/master/specification/images/overview-diagram.svg\">\n\nUse this API to manage a patient's prescriptions as held by their GP practice.\n\nYou can:\n\n- request a new instance of a repeat prescription\n- view all of a patients medications, whether acute or repeat, past or present\n- cancel a repeat prescription request\n- check the status of a current prescription request\n- request a new instance of a repeat prescription to a one off nomination pharmacy\n    \n\nThe end user must be a patient who is:\n\n- registered with the GP practice\n- registered with NHS login to P9 identity verification level\n    \n\nFor example:\n\n- a patient can view their own medication, request a new instance of a repeat prescription and cancel that request\n    \n\n## Overview of the API automation framework\n\nThe purpose of this automation suite is to check that the data returned from the Prescriptions Management FHIR API conforms to the specifications outlined in the documentation. The documentation can be found here:\n\n1. General overview as well details of each request: [https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-prescriptions-fhir#overview--overview]()\n2. FHIR specifications for each endpoint: [https://simplifier.net/guide/GP-Connect-Patient-Facing-Prescription-Management/Home/FHIR-Assets/All-Assets?version=current]()\n    \n\nThe tests are primarily designed to test the shape of the returned data, rather than the exact values returned, except where those values should remain constant.\n\nExamples of the logic tested are that:\n\n- all required properties are returned\n- elements within an array do not exceed the number specified\n- conditionally required elements are only present where the stated conditions are met\n- fixed values are always returned\n    \n\nThe automation framework covers only one positive test for each endpoint (excluding the task endpoint which has 3 tests), but all scenarios for error tests (tests returning 4XX statuscodes). The remaining positive tests, using differing optional parameters in the request, are covered in manual tests.\n\n## Why Postman\n\nPostman was chosen as the API testing application in order to simplify running, maintaining and developing the framework for both technically and non-technically minded people as the user interface makes it more accessible.\n\n## Installation\n\n- Install Postman, go to: [https://www.postman.com/downloads/]()\n- Download this test collection to your local PC\n- Open the collection using postman\n    \n\n## Structure\n\nThe framework is split into folders and subfolders reflecting the endpoints of the API (ignoring the baseUrl). Let's take the following endpoint as an example:\n\n<img src=\"https://content.pstmn.io/a5aa9ed5-65e1-4f0e-97e5-b9e04abd13dc/aW1hZ2UucG5n\" width=\"472\" height=\"72\">\n\nYou would find the tests for this endpoint at: Patient > Id > MedicationStatement. The actual tests can be found by clicking on any test file and looking under the 'Tests' header:\n\n<img src=\"https://content.pstmn.io/0021f01c-5c30-4a93-82cf-b6be9be76a14/aW1hZ2UucG5n\" width=\"504\" height=\"261\">\n\nAll tests are written in javascript. Each test is titled using BDD syntax using the 'Given', 'When', 'Then' format, as well as a small description above the test.\n\nAll test files will contain mostly similar tests. They include checking the headers returned are correct, the status code returned is as expected, as well as the schema (the structure of the data) is correct. Towards then end, each file will contain some tests specific to that endpoint, relating to the logic encorporated within the specs.\n\n## User-flow\n\n<img src=\"https://content.pstmn.io/d5f03983-bd2c-474b-a0ee-81e69d270cf6/aW1hZ2UucG5n\" alt=\"\" height=\"193\" width=\"356\">\n\nThe requests in this folder are designed to run through requests as they might be by a user and MUST be run in sequence for them to work.\n\n## Setup\n\nBefore running any tests you must change the following:\n\n- Change the baseUrl variable. The baseUrl is currently pointing towards the NHS sandbox environment. To run this against your own testing environment, the base url will need to be changed. To do this:\n    - select the collection\n    - from the top panel, select the 'Variables' option\n    - change the 'baseUrl' 'current value' to the one for your environment\n- Change all existing variables that need changing to those present in your database. Do this by following the same steps as above and replacing the other current values with existing ones in your database. Those that need changing are marked as \"PleaseReplaceWith... etc\". These variables MUST be updated to match those existing in your database BEFORE the tests can be run. Do NOT update any variables that do not begin with \"PleaseReplaceWith\", they are set within the tests themselves.\n- Authorization token may need to be added to the header for the requests as well as a statement within the API framework to ignore authentication when receiving said token. This framework is not designed to test authentication, rather the shape of the returned data, and therefore does not implement authentication as it will be in production.\n    \n\n<img src=\"https://content.pstmn.io/c3918268-c73b-4171-b487-267ceeb49774/aW1hZ2UucG5n\" width=\"562\" height=\"281\">\n\n## Running one test\n\n- Select a test you'd like to run from the left hand pannel, eg: MedicationRequest > Id > Positive tests > Get a specific planned medication request\n- Press send\n- Results will be displayed below:\n    \n\n<img src=\"https://content.pstmn.io/803f532b-f0e6-437e-a1be-5ac3dd4b6345/aW1hZ2UucG5n\" width=\"506\" height=\"292\">\n\n## Running the collection\n\n- Right click the collection from the left hand panel\n- Select 'Run collection'\n- Either leave all tests selected or select specific ones you'd like to run\n- Select to run manually as a one off or schedule to run them frequently\n- Select the orange 'run' button:\n    \n\n<img src=\"https://content.pstmn.io/ee02ccd9-7489-4678-8a05-bbebeb1f3631/aW1hZ2UucG5n\" width=\"448\" height=\"422\">\n\n- The tests will now run. The passed tests, failed tests, skipped tests, time taken to run etc... will be displayed at the top:\n    \n\n<img src=\"https://content.pstmn.io/bcbc390f-3694-496e-b95d-7fe7f130fd32/aW1hZ2UucG5n\" width=\"564\" height=\"186\">\n\n## Adding tests\n\nTo add tests, simply use the three dots next to an existing folder and either select to add a new folder or add a new request. You can copy existing tests over or write your own, and make sure to keep the existing format and/or update this documentation to reflect your changes\n\n## Capturing evidence\n\nTo capture test evidence of the collection run, the following needs to be done:\n\n- Right click the collection from the left hand panel\n- Select 'Run collection'\n- **Check 'Persist responses for a session'**\n- Select the orange 'run' button:\n    \n\n<img src=\"https://content.pstmn.io/dd7a086d-a346-4349-853b-a596fe2e775b/aW1hZ2UucG5n\" width=\"394\" height=\"432\">\n\n- Once the run has finished you should see 'Export results' in top right:\n    \n\n<img src=\"https://content.pstmn.io/30f06127-a645-4ddf-9cc9-6a8ff6da2d73/aW1hZ2UucG5n\" width=\"514\" height=\"111\">\n\n- Select this to download the results\n- As well as this, you will need to capture the requests sent for each request\n- Select each request in turn. Eg click on this request:\n    \n\n<img src=\"https://content.pstmn.io/ea9e567f-37e5-4ea5-a661-ceb57b6d57c3/aW1hZ2UucG5n\" width=\"476\" height=\"186\">\n\n- The following will appear with a response and request header:\n    \n\n<img src=\"https://content.pstmn.io/483c360e-917b-458e-9d73-489194763122/aW1hZ2UucG5n\" width=\"408\" height=\"483\">\n\n- Copy the content of both the response AND request into a text document, clearly labelled with the name of the request\n- Do this for each request sent\n- You will now have a file with the request and response for each request in text format as well as the downloaded file in json format as evidence\n    \n\n## Further help\n\nIf you'd like further help on using postman, visit the Postman learning centre: [https://learning.postman.com/docs/introduction/overview/]()",
+		"description": "## End-to-end Overview\n\n<img src=\"https://raw.githubusercontent.com/NHSDigital/gp-connect-prescriptions-management-fhir/master/specification/images/overview-diagram.svg\">\n\nUse this API to manage a patient's prescriptions as held by their GP practice.\n\nYou can:\n\n- request a new instance of a repeat prescription\n- view all of a patients medications, whether acute or repeat, past or present\n- cancel a repeat prescription request\n- check the status of a current prescription request\n- request a new instance of a repeat prescription to a one off nomination pharmacy\n    \n\nThe end user must be a patient who is:\n\n- registered with the GP practice\n- registered with NHS login to P9 identity verification level\n    \n\nFor example:\n\n- a patient can view their own medication, request a new instance of a repeat prescription and cancel that request\n    \n\n## Overview of the API automation framework\n\nThe purpose of this automation suite is to check that the data returned from the Prescriptions Management FHIR API conforms to the specifications outlined in the documentation. The documentation can be found here:\n\n1. General overview as well details of each request: [https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-prescriptions-fhir#overview--overview](https://)\n2. FHIR specifications for each endpoint: [https://simplifier.net/guide/GP-Connect-Patient-Facing-Prescription-Management/Home/FHIR-Assets/All-Assets?version=current](https://)\n    \n\nThe tests are primarily designed to test the shape of the returned data, rather than the exact values returned, except where those values should remain constant.\n\nExamples of the logic tested are that:\n\n- all required properties are returned\n- elements within an array do not exceed the number specified\n- conditionally required elements are only present where the stated conditions are met\n- fixed values are always returned\n    \n\nThe automation framework covers only one positive test for each endpoint (excluding the task endpoint which has 3 tests), but all scenarios for error tests (tests returning 4XX statuscodes). The remaining positive tests, using differing optional parameters in the request, are covered in manual tests.\n\n## Why Postman\n\nPostman was chosen as the API testing application in order to simplify running, maintaining and developing the framework for both technically and non-technically minded people as the user interface makes it more accessible.\n\n## Installation\n\n- Install Postman, go to: [https://www.postman.com/downloads/](https://)\n- Download this test collection to your local PC\n- Open the collection using postman\n    \n\n## Structure\n\nThe framework is split into folders and subfolders reflecting the endpoints of the API (ignoring the baseUrl). Let's take the following endpoint as an example:\n\n<img src=\"https://content.pstmn.io/a5aa9ed5-65e1-4f0e-97e5-b9e04abd13dc/aW1hZ2UucG5n\" width=\"472\" height=\"72\">\n\nYou would find the tests for this endpoint at: Patient > Id > MedicationStatement. The actual tests can be found by clicking on any test file and looking under the 'Tests' header:\n\n<img src=\"https://content.pstmn.io/0021f01c-5c30-4a93-82cf-b6be9be76a14/aW1hZ2UucG5n\" width=\"504\" height=\"261\">\n\nAll tests are written in javascript. Each test is titled using BDD syntax using the 'Given', 'When', 'Then' format, as well as a small description above the test.\n\nAll test files will contain mostly similar tests. They include checking the headers returned are correct, the status code returned is as expected, as well as the schema (the structure of the data) is correct. Towards then end, each file will contain some tests specific to that endpoint, relating to the logic encorporated within the specs.\n\n## User-flow\n\n<img src=\"https://content.pstmn.io/d5f03983-bd2c-474b-a0ee-81e69d270cf6/aW1hZ2UucG5n\" width=\"356\" height=\"193\">\n\nThe requests in this folder are designed to run through requests as they might be by a user and MUST be run in sequence for them to work.\n\n## Setup\n\nBefore running any tests you must change the following:\n\n- Change the baseUrl variable. The baseUrl is currently pointing towards the NHS sandbox environment. To run this against your own testing environment, the base url will need to be changed. To do this:\n    \n    - select the collection\n    - from the top panel, select the 'Variables' option\n    - change the 'baseUrl' 'Initial value' to the one for your environment\n        \n- Change all existing variables that need changing to those present in your database. Do this by following the same steps as above and replacing the other Initial values with existing ones in your database. Those that need changing are marked as \"PleaseReplaceWith... etc\". These variables MUST be updated to match those existing in your database BEFORE the tests can be run. Do NOT update any variables that do not begin with \"PleaseReplaceWith\", they are set within the tests themselves.\n    \n- Authorization token may need to be added to the header for the requests as well as a statement within the API framework to ignore authentication when receiving said token. This framework is not designed to test authentication, rather the shape of the returned data, and therefore does not implement authentication as it will be in production.\n    \n\n<img src=\"https://content.pstmn.io/c3918268-c73b-4171-b487-267ceeb49774/aW1hZ2UucG5n\" width=\"562\" height=\"281\">\n\n## Running one test\n\n- Select a test you'd like to run from the left hand pannel, eg: MedicationRequest > Id > Positive tests > Get a specific planned medication request\n- Press send\n- Results will be displayed below:\n    \n\n<img src=\"https://content.pstmn.io/803f532b-f0e6-437e-a1be-5ac3dd4b6345/aW1hZ2UucG5n\" width=\"506\" height=\"292\">\n\n## Running the collection\n\n- Right click the collection from the left hand panel\n- Select 'Run collection'\n- Either leave all tests selected or select specific ones you'd like to run\n- Select to run manually as a one off or schedule to run them frequently\n- Select the orange 'run' button:\n    \n\n<img src=\"https://content.pstmn.io/ee02ccd9-7489-4678-8a05-bbebeb1f3631/aW1hZ2UucG5n\" width=\"448\" height=\"422\">\n\n- The tests will now run. The passed tests, failed tests, skipped tests, time taken to run etc... will be displayed at the top:\n    \n\n<img src=\"https://content.pstmn.io/bcbc390f-3694-496e-b95d-7fe7f130fd32/aW1hZ2UucG5n\" width=\"564\" height=\"186\">\n\n## Adding tests\n\nTo add tests, simply use the three dots next to an existing folder and either select to add a new folder or add a new request. You can copy existing tests over or write your own, and make sure to keep the existing format and/or update this documentation to reflect your changes\n\n## Capturing evidence\n\nTo capture test evidence of the collection run, the following needs to be done:\n\n- Right click the collection from the left hand panel\n- Select 'Run collection'\n- **Check 'Persist responses for a session'**\n- Select the orange 'run' button:\n    \n\n<img src=\"https://content.pstmn.io/dd7a086d-a346-4349-853b-a596fe2e775b/aW1hZ2UucG5n\" width=\"394\" height=\"432\">\n\n- Once the run has finished you should see 'Export results' in top right:\n    \n\n<img src=\"https://content.pstmn.io/30f06127-a645-4ddf-9cc9-6a8ff6da2d73/aW1hZ2UucG5n\" width=\"514\" height=\"111\">\n\n- Select this to download the results\n- As well as this, you will need to capture the requests sent for each request\n- Select each request in turn. Eg click on this request:\n    \n\n<img src=\"https://content.pstmn.io/ea9e567f-37e5-4ea5-a661-ceb57b6d57c3/aW1hZ2UucG5n\" width=\"476\" height=\"186\">\n\n- The following will appear with a response and request header:\n    \n\n<img src=\"https://content.pstmn.io/483c360e-917b-458e-9d73-489194763122/aW1hZ2UucG5n\" width=\"408\" height=\"483\">\n\n- Copy the content of both the response AND request into a text document, clearly labelled with the name of the request\n- Do this for each request sent\n- You will now have a file with the request and response for each request in text format as well as the downloaded file in json format as evidence\n    \n\n## Further help\n\nIf you'd like further help on using postman, visit the Postman learning centre: [https://learning.postman.com/docs/introduction/overview/](https://)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "10104196"
+		"_exporter_id": "30594351"
 	},
 	"item": [
 		{
@@ -26,7 +26,7 @@
 													"var jsonData = pm.response.json();\r",
 													"\r",
 													"//Verify the response status code\r",
-													"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+													"pm.test(\"GIVEN I provide an existing valid Medication Request ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
@@ -566,7 +566,7 @@
 													"var jsonData = pm.response.json();\r",
 													"\r",
 													"//Verify the response status code\r",
-													"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 400\", function () {\r",
+													"pm.test(\"GIVEN I send an incorrect X-Request-ID, WHEN I send the request, THEN the status code response is 400\", function () {\r",
 													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
@@ -774,7 +774,7 @@
 													"var jsonData = pm.response.json();\r",
 													"\r",
 													"//Verify the response status code\r",
-													"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 422\", function () {\r",
+													"pm.test(\"GIVEN I send an incorrect MedicationRequest id, WHEN I send the request, THEN the status code response is 422\", function () {\r",
 													"    pm.response.to.have.status(422);\r",
 													"});\r",
 													"\r",
@@ -981,7 +981,7 @@
 													"var jsonData = pm.response.json();\r",
 													"\r",
 													"//Verify the response status code\r",
-													"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 422\", function () {\r",
+													"pm.test(\"GIVEN I send an incorrect MedicationRequest id request, WHEN I send the request, THEN the status code response is 422\", function () {\r",
 													"    pm.response.to.have.status(422);\r",
 													"});\r",
 													"\r",
@@ -1188,7 +1188,7 @@
 													"var jsonData = pm.response.json();\r",
 													"\r",
 													"//Verify the response status code\r",
-													"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 422\", function () {\r",
+													"pm.test(\"GIVEN I send an incorrect MedicationRequest id request, WHEN I send the request, THEN the status code response is 422\", function () {\r",
 													"    pm.response.to.have.status(422);\r",
 													"});\r",
 													"\r",
@@ -1752,6 +1752,213 @@
 													"//Verify the response status code\r",
 													"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 422\", function () {\r",
 													"    pm.response.to.have.status(422);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Correlation-ID\r",
+													"pm.test(\"GIVEN I provide an X-Correlation-ID in the header, WHEN I send the request, THEN the same X-Correlation-ID is returned in the response header\", function () {\r",
+													"    var XCorrelationID = pm.variables.get(\"X-Correlation-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Correlation-ID\")).to.eql(XCorrelationID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Request-ID\r",
+													"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", function () {\r",
+													"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header content-type\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"});\r",
+													"\r",
+													"//Verify response schema\r",
+													"pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
+													"    var schema = {\r",
+													"        \"type\": \"object\",\r",
+													"        \"properties\": {\r",
+													"            \"resourceType\": {\r",
+													"                \"type\": \"string\",\r",
+													"                \"const\": \"OperationOutcome\"\r",
+													"            },\r",
+													"            \"id\": {\r",
+													"                \"type\": \"string\"\r",
+													"            },\r",
+													"            \"meta\": {\r",
+													"                \"type\": \"object\",\r",
+													"                \"properties\": {\r",
+													"                    \"profile\": {\r",
+													"                        \"type\": \"array\",\r",
+													"                        \"minItems\": 1,\r",
+													"                        \"maxItems\": 1,\r",
+													"                        \"items\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"const\": \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\"profile\"]\r",
+													"            },\r",
+													"            \"issue\": {\r",
+													"                \"type\": \"array\",\r",
+													"                \"items\": {\r",
+													"                    \"properties\": {\r",
+													"                        \"id\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"severity\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"fatal\",\r",
+													"                                \"error\",\r",
+													"                                \"warning\",\r",
+													"                                \"information\"\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"code\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"invalid\",\r",
+													"                                \"structure\",\r",
+													"                                \"required\",\r",
+													"                                \"value\",\r",
+													"                                \"invariant\",\r",
+													"                                \"security\",\r",
+													"                                \"login\",\r",
+													"                                \"unknown\",\r",
+													"                                \"expired\",\r",
+													"                                \"forbidden\",\r",
+													"                                \"suppressed\",\r",
+													"                                \"processing\",\r",
+													"                                \"not-supported\",\r",
+													"                                \"duplicate\",\r",
+													"                                \"not-found\",\r",
+													"                                \"too-long\",\r",
+													"                                \"code-invalid\",\r",
+													"                                \"extension\",\r",
+													"                                \"too-costly\",\r",
+													"                                \"business-rule\",\r",
+													"                                \"conflict\",\r",
+													"                                \"incomplete\",\r",
+													"                                \"transient\",\r",
+													"                                \"lock-error\",\r",
+													"                                \"no-store\",\r",
+													"                                \"exception\",\r",
+													"                                \"timeout\",\r",
+													"                                \"throttled\",\r",
+													"                                \"informational\",\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"details\": {\r",
+													"                            \"type\": \"object\",\r",
+													"                            \"properties\": {\r",
+													"                                \"coding\": {\r",
+													"                                    \"type\": \"array\",\r",
+													"                                    \"minItems\": 1,\r",
+													"                                    \"items\": {\r",
+													"                                        \"properties\": {\r",
+													"                                            \"system\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            },\r",
+													"                                            \"code\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                                \"const\" : \"INVALID_PARAMETER\",\r",
+													"                                            },\r",
+													"                                            \"display\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            }\r",
+													"                                        },\r",
+													"                                        \"required\": [\r",
+													"                                            \"system\",\r",
+													"                                            \"code\",\r",
+													"                                            \"display\"\r",
+													"                                        ]\r",
+													"                                    }\r",
+													"                                }\r",
+													"                            }\r",
+													"                        },\r",
+													"                        \"diagnostics\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"expression\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\r",
+													"                    \"severity\",\r",
+													"                    \"code\",\r",
+													"                ]\r",
+													"            }\r",
+													"        },\r",
+													"        \"required\": [\r",
+													"            \"resourceType\",\r",
+													"            \"meta\",\r",
+													"            \"issue\"\r",
+													"        ]\r",
+													"    }\r",
+													"    pm.response.to.have.jsonSchema(schema);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"description": "An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.\nMirrored back in a response header.\n",
+												"key": "X-Correlation-ID",
+												"value": "{{X-Correlation-ID}}"
+											},
+											{
+												"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
+												"key": "X-Request-ID",
+												"value": "{{X-Request-ID}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/fhir+json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/PractionerRole/InvalidUUID",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"PractionerRole",
+												"InvalidUUID"
+											]
+										},
+										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
+									},
+									"response": []
+								},
+								{
+									"name": "Error: No X-request-id - 400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();\r",
+													"\r",
+													"//Verify the response status code\r",
+													"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"//Verify response header X-Correlation-ID\r",
@@ -2597,7 +2804,7 @@
 															"var jsonData = pm.response.json();\r",
 															"\r",
 															"//Verify the response status code\r",
-															"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+															"pm.test(\"GIVEN I provide an existing valid patient ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
 															"    pm.response.to.have.status(200);\r",
 															"});\r",
 															"\r",
@@ -2619,7 +2826,7 @@
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
-															"pm.test(\"GIVEN I send a practitioner role request, WHEN the response is returned, THEN the json response corresponds to the required practitioner role schema\", () => {\r",
+															"pm.test(\"GIVEN I send a medicationStatement request, WHEN the response is returned, THEN the json response corresponds to the required medicationStatement schema\", () => {\r",
 															"    var schema = {\r",
 															"        \"type\": \"object\",\r",
 															"        \"properties\": {\r",
@@ -4355,7 +4562,7 @@
 															"var jsonData = pm.response.json();\r",
 															"\r",
 															"//Verify the response status code\r",
-															"pm.test(\"GIVEN I provide an existing valid medication request ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+															"pm.test(\"GIVEN I provide an existing valid patient ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
 															"    pm.response.to.have.status(200);\r",
 															"});\r",
 															"\r",
@@ -7650,7 +7857,7 @@
 											"pm.collectionVariables.set('taskIdPrescription', jsonData.id)\r",
 											"\r",
 											"//Verify the response status code\r",
-											"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+											"pm.test(\"GIVEN I provide an existing valid patient ID, WHEN I send the request, THEN the status code response is 201\", () => {\r",
 											"    pm.response.to.have.status(201);\r",
 											"});\r",
 											"\r",
@@ -8046,7 +8253,7 @@
 											"pm.collectionVariables.set('taskIdPrescription&Pharmacy', jsonData.id)\r",
 											"\r",
 											"//Verify the response status code\r",
-											"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+											"pm.test(\"GIVEN I provide an existing valid patient ID, WHEN I send the request, THEN the status code response is 201\", () => {\r",
 											"    pm.response.to.have.status(201);\r",
 											"});\r",
 											"\r",
@@ -8441,7 +8648,7 @@
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"//Verify the response status code\r",
-											"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+											"pm.test(\"GIVEN I provide an existing valid patient ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
@@ -8864,7 +9071,7 @@
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"//Verify the response status code\r",
-											"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+											"pm.test(\"GIVEN I provide an existing valid task ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
@@ -9297,7 +9504,7 @@
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"//Verify the response status code\r",
-											"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+											"pm.test(\"GIVEN I provide an existing valid taskId prescription&Pharmacy, WHEN I send the request, THEN the status code response is 200\", () => {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
@@ -9723,7 +9930,7 @@
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"//Verify the response status code\r",
-											"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+											"pm.test(\"GIVEN I provide an existing valid taskIdPrescription, WHEN I send the request, THEN the status code response is 200\", () => {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
@@ -10118,7 +10325,7 @@
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"//Verify the response status code\r",
-											"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+											"pm.test(\"GIVEN I provide an existing valid taskIdPrescription&Pharmacy, WHEN I send the request, THEN the status code response is 200\", () => {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
@@ -20248,7 +20455,7 @@
 									"//in the previous request as well as a code for the new pharmacy\r",
 									"\r",
 									"//Verify the response status code\r",
-									"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+									"pm.test(\"GIVEN I provide an existing valid practitioner role ID, WHEN I send the request, THEN the status code response is 201\", () => {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
@@ -20503,73 +20710,73 @@
 		},
 		{
 			"key": "X-Correlation-ID",
-			"value": "",
+			"value": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
 			"type": "string"
 		},
 		{
 			"key": "X-Request-ID",
-			"value": "",
+			"value": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
 			"type": "string"
 		},
 		{
 			"key": "MedicationRequestId",
-			"value": "",
+			"value": "PleaseReplaceWithActualMedicationRequestinYourDb",
 			"type": "string"
 		},
 		{
 			"key": "PractitionerId",
-			"value": "",
+			"value": "PleaseReplaceWithActualPractioneRoleinYourDb",
 			"type": "string"
 		},
 		{
 			"key": "TaskId",
-			"value": "",
+			"value": "PleaseReplaceWithActualTaskIdinYourDb",
 			"type": "string"
 		},
 		{
 			"key": "PatientId",
-			"value": "",
+			"value": "PleaseReplaceWithActualPatientIdinYourDb",
 			"type": "string"
 		},
 		{
 			"key": "PatientName",
-			"value": "",
+			"value": "PleaseReplaceWithActualPatientNameinYourDb",
 			"type": "string"
 		},
 		{
 			"key": "PharmacyCode",
-			"value": "",
+			"value": "PleaseReplaceWithActualPhmacyCodeinYourDb",
 			"type": "string"
 		},
 		{
 			"key": "taskIdPrescription",
-			"value": ""
+			"value": "7c747c6e-15c8-4b2f-8aa0-441f2ef703d6"
 		},
 		{
 			"key": "taskIdPrescription&Pharmacy",
-			"value": ""
+			"value": "7c747c6e-15c8-4b2f-8aa0-441f2ef703d6"
 		},
 		{
 			"key": "userFlowPatientId",
-			"value": "",
+			"value": "PleaseReplaceWithActualPatientIdinYourDb",
 			"type": "string"
 		},
 		{
 			"key": "userFlowMedicationRequestId",
-			"value": ""
+			"value": "PleaseReplaceWithActualMedicationRequestinYourDb"
 		},
 		{
 			"key": "userFlowPractitionerRoleId",
-			"value": ""
+			"value": "PleaseReplaceWithActualPractioneRoleinYourDb"
 		},
 		{
 			"key": "userFlowPharmacyCode",
-			"value": "",
+			"value": "PleaseReplaceWithActualPhmacyCodeinYourDb",
 			"type": "string"
 		},
 		{
 			"key": "userFlowTaskId",
-			"value": ""
+			"value": "PleaseReplaceWithActualTaskIdinYourDb"
 		}
 	]
 }
