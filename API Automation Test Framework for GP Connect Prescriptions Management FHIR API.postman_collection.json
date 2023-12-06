@@ -43,8 +43,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -533,7 +533,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -582,8 +582,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -741,12 +741,11 @@
 											{
 												"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
 												"key": "X-Request-ID",
-												"value": "{{X-Request-ID}}",
-												"disabled": true
+												"value": "{{X-Request-ID}}"
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -790,8 +789,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -953,7 +952,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -997,8 +996,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -1160,7 +1159,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -1204,8 +1203,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -1367,7 +1366,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -1411,8 +1410,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -1574,7 +1573,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -1633,8 +1632,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -1711,7 +1710,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -1760,8 +1759,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -1923,7 +1922,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -1967,8 +1966,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -2130,7 +2129,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -2174,8 +2173,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -2337,7 +2336,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -2381,8 +2380,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -2545,7 +2544,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -2589,8 +2588,8 @@
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
-													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 													"});\r",
 													"\r",
 													"//Verify response schema\r",
@@ -2752,7 +2751,7 @@
 											},
 											{
 												"key": "Accept",
-												"value": "application/fhir+json"
+												"value": "application/json+fhir; charset=utf-8"
 											}
 										],
 										"url": {
@@ -2814,8 +2813,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -3043,7 +3042,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -3093,8 +3092,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('aapplication/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -3257,7 +3256,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -3302,8 +3301,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -3465,7 +3464,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -3510,8 +3509,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -3673,7 +3672,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -3718,8 +3717,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -3881,7 +3880,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -3926,8 +3925,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -4089,7 +4088,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -4134,8 +4133,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('aapplication/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -4297,7 +4296,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -4348,8 +4347,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -4511,7 +4510,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -4572,8 +4571,8 @@
 															"});\r",
 															"\r",
 															"// Verify content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"// Verify schema\r",
@@ -5064,7 +5063,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -5114,8 +5113,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -5278,7 +5277,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -5323,8 +5322,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -5486,7 +5485,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -5531,8 +5530,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -5694,7 +5693,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -5739,8 +5738,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -5902,7 +5901,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -5947,8 +5946,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -6110,7 +6109,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -6155,8 +6154,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -6318,7 +6317,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -6369,8 +6368,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -6532,7 +6531,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -6583,8 +6582,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -6746,7 +6745,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -6797,8 +6796,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -6957,7 +6956,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -7008,8 +7007,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -7168,7 +7167,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -7219,8 +7218,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -7379,7 +7378,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -7430,8 +7429,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -7590,7 +7589,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -7641,8 +7640,8 @@
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
-															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+															"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+															"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 															"});\r",
 															"\r",
 															"//Verify response schema\r",
@@ -7801,7 +7800,7 @@
 													},
 													{
 														"key": "Accept",
-														"value": "application/fhir+json"
+														"value": "application/json+fhir; charset=utf-8"
 													}
 												],
 												"url": {
@@ -7867,8 +7866,8 @@
 											"});\r",
 											"\r",
 											"// Verify content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'aapplication/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"// Verify schema\r",
@@ -8209,7 +8208,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -8263,8 +8262,8 @@
 											"});\r",
 											"\r",
 											"// Verify content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"// Verify schema\r",
@@ -8605,7 +8604,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -8658,8 +8657,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'aapplication/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -9031,7 +9030,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -9081,8 +9080,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -9465,7 +9464,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -9514,8 +9513,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -9887,7 +9886,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -9940,8 +9939,8 @@
 											"});\r",
 											"\r",
 											"// Verify content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json-patch+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json-patch+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"// Verify schema\r",
@@ -10275,7 +10274,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -10335,8 +10334,8 @@
 											"});\r",
 											"\r",
 											"// Verify content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"// Verify schema\r",
@@ -10670,7 +10669,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -10735,8 +10734,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -10896,7 +10895,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -10946,12 +10945,12 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"/*pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
-											"pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
+											"/*pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
 											"    var schema = {\r",
 											"        \"type\": \"object\",\r",
 											"        \"properties\": {\r",
@@ -11106,7 +11105,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -11160,8 +11159,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -11320,7 +11319,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -11374,8 +11373,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -11534,7 +11533,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -11588,8 +11587,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -11748,7 +11747,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -11798,8 +11797,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -11958,7 +11957,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -12008,8 +12007,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -12168,7 +12167,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -12218,8 +12217,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -12378,7 +12377,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -12428,8 +12427,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -12588,7 +12587,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -12637,8 +12636,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -12797,7 +12796,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -12846,8 +12845,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -13006,7 +13005,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -13055,8 +13054,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -13215,7 +13214,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -13264,8 +13263,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -13424,7 +13423,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -13477,8 +13476,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -13637,7 +13636,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -13690,8 +13689,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -13850,7 +13849,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -13903,8 +13902,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -14063,7 +14062,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -14116,8 +14115,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -14276,7 +14275,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"url": {
@@ -14329,8 +14328,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -14493,7 +14492,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -14546,8 +14545,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -14710,7 +14709,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -14763,8 +14762,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -14927,7 +14926,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -14980,8 +14979,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -15144,7 +15143,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -15197,8 +15196,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -15361,7 +15360,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -15414,8 +15413,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -15578,7 +15577,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -15631,8 +15630,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -15795,7 +15794,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -15848,8 +15847,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -16012,7 +16011,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -16065,8 +16064,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -16229,7 +16228,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -16282,8 +16281,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -16446,7 +16445,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -16499,8 +16498,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -16663,7 +16662,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -16716,8 +16715,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -16880,7 +16879,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -16933,8 +16932,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -17097,7 +17096,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -17150,8 +17149,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -17314,7 +17313,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -17367,8 +17366,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -17531,7 +17530,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -17584,8 +17583,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -17748,7 +17747,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -17801,8 +17800,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -17965,7 +17964,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -18018,8 +18017,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -18182,7 +18181,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -18235,8 +18234,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -18399,7 +18398,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -18452,8 +18451,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -18616,7 +18615,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -18669,8 +18668,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -18833,7 +18832,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -18886,8 +18885,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -19050,7 +19049,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -19103,8 +19102,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -19267,7 +19266,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -19327,8 +19326,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -19491,7 +19490,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -19551,8 +19550,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -19715,7 +19714,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -19775,8 +19774,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -19939,7 +19938,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -19999,8 +19998,8 @@
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
-											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json'\", () => {\r",
-											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json')\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/json+fhir; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/json+fhir; charset=utf-8')\r",
 											"});\r",
 											"\r",
 											"//Verify response schema\r",
@@ -20163,7 +20162,7 @@
 									},
 									{
 										"key": "Accept",
-										"value": "application/fhir+json"
+										"value": "application/json+fhir; charset=utf-8"
 									}
 								],
 								"body": {
@@ -20257,7 +20256,7 @@
 							},
 							{
 								"key": "Accept",
-								"value": "application/fhir+json"
+								"value": "application/json+fhir; charset=utf-8"
 							}
 						],
 						"url": {
@@ -20350,7 +20349,7 @@
 							},
 							{
 								"key": "Accept",
-								"value": "application/fhir+json"
+								"value": "application/json+fhir; charset=utf-8"
 							}
 						],
 						"url": {
@@ -20417,7 +20416,7 @@
 							},
 							{
 								"key": "Accept",
-								"value": "application/fhir+json"
+								"value": "application/json+fhir; charset=utf-8"
 							}
 						],
 						"url": {
@@ -20489,7 +20488,7 @@
 							},
 							{
 								"key": "Accept",
-								"value": "application/fhir+json"
+								"value": "application/json+fhir; charset=utf-8"
 							}
 						],
 						"body": {
@@ -20571,7 +20570,7 @@
 							},
 							{
 								"key": "Accept",
-								"value": "application/fhir+json"
+								"value": "application/json+fhir; charset=utf-8"
 							}
 						],
 						"url": {
@@ -20640,7 +20639,7 @@
 							},
 							{
 								"key": "Accept",
-								"value": "application/fhir+json"
+								"value": "application/json+fhir; charset=utf-8"
 							}
 						],
 						"body": {
