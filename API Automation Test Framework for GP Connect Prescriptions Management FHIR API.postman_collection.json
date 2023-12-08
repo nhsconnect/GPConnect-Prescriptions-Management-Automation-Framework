@@ -741,7 +741,8 @@
 											{
 												"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
 												"key": "X-Request-ID",
-												"value": "{{X-Request-ID}}"
+												"value": "{{X-Request-ID}}",
+												"disabled": true
 											},
 											{
 												"key": "Accept",
@@ -2125,7 +2126,8 @@
 											{
 												"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
 												"key": "X-Request-ID",
-												"value": "{{X-Request-ID}}"
+												"value": "{{X-Request-ID}}",
+												"disabled": true
 											},
 											{
 												"key": "Accept",
@@ -3251,7 +3253,8 @@
 													{
 														"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
 														"key": "X-Request-ID",
-														"value": "{{X-Request-ID}}"
+														"value": "{{X-Request-ID}}",
+														"disabled": true
 													},
 													{
 														"key": "Accept",
