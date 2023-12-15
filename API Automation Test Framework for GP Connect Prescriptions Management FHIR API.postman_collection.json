@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "81a99933-2c66-4122-8aeb-20fe525cd8ed",
+		"_postman_id": "5f21b7e6-291e-4528-b115-a51eb7d8d736",
 		"name": "API Automation Test Framework for GP Connect Prescriptions Management FHIR API",
 		"description": "## End-to-end Overview\n\n<img src=\"https://raw.githubusercontent.com/NHSDigital/gp-connect-prescriptions-management-fhir/master/specification/images/overview-diagram.svg\">\n\nUse this API to manage a patient's prescriptions as held by their GP practice.\n\nYou can:\n\n- request a new instance of a repeat prescription\n- view all of a patients medications, whether acute or repeat, past or present\n- cancel a repeat prescription request\n- check the status of a current prescription request\n- request a new instance of a repeat prescription to a one off nomination pharmacy\n    \n\nThe end user must be a patient who is:\n\n- registered with the GP practice\n- registered with NHS login to P9 identity verification level\n    \n\nFor example:\n\n- a patient can view their own medication, request a new instance of a repeat prescription and cancel that request\n    \n\n## Overview of the API automation framework\n\nThe purpose of this automation suite is to check that the data returned from the Prescriptions Management FHIR API conforms to the specifications outlined in the documentation. The documentation can be found here:\n\n1. General overview as well details of each request: [https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-prescriptions-fhir#overview--overview](https://)\n2. FHIR specifications for each endpoint: [https://simplifier.net/guide/GP-Connect-Patient-Facing-Prescription-Management/Home/FHIR-Assets/All-Assets?version=current](https://)\n    \n\nThe tests are primarily designed to test the shape of the returned data, rather than the exact values returned, except where those values should remain constant.\n\nExamples of the logic tested are that:\n\n- all required properties are returned\n- elements within an array do not exceed the number specified\n- conditionally required elements are only present where the stated conditions are met\n- fixed values are always returned\n    \n\nThe automation framework covers only one positive test for each endpoint (excluding the task endpoint which has 3 tests), but all scenarios for error tests (tests returning 4XX statuscodes). The remaining positive tests, using differing optional parameters in the request, are covered in manual tests.\n\n## Why Postman\n\nPostman was chosen as the API testing application in order to simplify running, maintaining and developing the framework for both technically and non-technically minded people as the user interface makes it more accessible.\n\n## Installation\n\n- Install Postman, go to: [https://www.postman.com/downloads/](https://)\n- Download this test collection to your local PC\n- Open the collection using postman\n    \n\n## Structure\n\nThe framework is split into folders and subfolders reflecting the endpoints of the API (ignoring the baseUrl). Let's take the following endpoint as an example:\n\n<img src=\"https://content.pstmn.io/a5aa9ed5-65e1-4f0e-97e5-b9e04abd13dc/aW1hZ2UucG5n\" width=\"472\" height=\"72\">\n\nYou would find the tests for this endpoint at: Patient > Id > MedicationStatement. The actual tests can be found by clicking on any test file and looking under the 'Tests' header:\n\n<img src=\"https://content.pstmn.io/0021f01c-5c30-4a93-82cf-b6be9be76a14/aW1hZ2UucG5n\" width=\"504\" height=\"261\">\n\nAll tests are written in javascript. Each test is titled using BDD syntax using the 'Given', 'When', 'Then' format, as well as a small description above the test.\n\nAll test files will contain mostly similar tests. They include checking the headers returned are correct, the status code returned is as expected, as well as the schema (the structure of the data) is correct. Towards then end, each file will contain some tests specific to that endpoint, relating to the logic encorporated within the specs.\n\n## User-flow\n\n<img src=\"https://content.pstmn.io/d5f03983-bd2c-474b-a0ee-81e69d270cf6/aW1hZ2UucG5n\" width=\"356\" height=\"193\">\n\nThe requests in this folder are designed to run through requests as they might be by a user and MUST be run in sequence for them to work.\n\n## Setup\n\nBefore running any tests you must change the following:\n\n- Change the baseUrl variable. The baseUrl is currently pointing towards the NHS sandbox environment. To run this against your own testing environment, the base url will need to be changed. To do this:\n    \n    - select the collection\n    - from the top panel, select the 'Variables' option\n    - change the 'baseUrl' 'Initial value' to the one for your environment\n        \n- Change all existing variables that need changing to those present in your database. Do this by following the same steps as above and replacing the other Initial values with existing ones in your database. Those that need changing are marked as \"PleaseReplaceWith... etc\". These variables MUST be updated to match those existing in your database BEFORE the tests can be run. Do NOT update any variables that do not begin with \"PleaseReplaceWith\", they are set within the tests themselves.\n    \n- Authorization token may need to be added to the header for the requests as well as a statement within the API framework to ignore authentication when receiving said token. This framework is not designed to test authentication, rather the shape of the returned data, and therefore does not implement authentication as it will be in production.\n    \n\n<img src=\"https://content.pstmn.io/c3918268-c73b-4171-b487-267ceeb49774/aW1hZ2UucG5n\" width=\"562\" height=\"281\">\n\n## Running one test\n\n- Select a test you'd like to run from the left hand pannel, eg: MedicationRequest > Id > Positive tests > Get a specific planned medication request\n- Press send\n- Results will be displayed below:\n    \n\n<img src=\"https://content.pstmn.io/803f532b-f0e6-437e-a1be-5ac3dd4b6345/aW1hZ2UucG5n\" width=\"506\" height=\"292\">\n\n## Running the collection\n\n- Right click the collection from the left hand panel\n- Select 'Run collection'\n- Either leave all tests selected or select specific ones you'd like to run\n- Select to run manually as a one off or schedule to run them frequently\n- Select the orange 'run' button:\n    \n\n<img src=\"https://content.pstmn.io/ee02ccd9-7489-4678-8a05-bbebeb1f3631/aW1hZ2UucG5n\" width=\"448\" height=\"422\">\n\n- The tests will now run. The passed tests, failed tests, skipped tests, time taken to run etc... will be displayed at the top:\n    \n\n<img src=\"https://content.pstmn.io/bcbc390f-3694-496e-b95d-7fe7f130fd32/aW1hZ2UucG5n\" width=\"564\" height=\"186\">\n\n## Adding tests\n\nTo add tests, simply use the three dots next to an existing folder and either select to add a new folder or add a new request. You can copy existing tests over or write your own, and make sure to keep the existing format and/or update this documentation to reflect your changes\n\n## Capturing evidence\n\nTo capture test evidence of the collection run, the following needs to be done:\n\n- Right click the collection from the left hand panel\n- Select 'Run collection'\n- **Check 'Persist responses for a session'**\n- Select the orange 'run' button:\n    \n\n<img src=\"https://content.pstmn.io/dd7a086d-a346-4349-853b-a596fe2e775b/aW1hZ2UucG5n\" width=\"394\" height=\"432\">\n\n- Once the run has finished you should see 'Export results' in top right:\n    \n\n<img src=\"https://content.pstmn.io/30f06127-a645-4ddf-9cc9-6a8ff6da2d73/aW1hZ2UucG5n\" width=\"514\" height=\"111\">\n\n- Select this to download the results\n- As well as this, you will need to capture the requests sent for each request\n- Select each request in turn. Eg click on this request:\n    \n\n<img src=\"https://content.pstmn.io/ea9e567f-37e5-4ea5-a661-ceb57b6d57c3/aW1hZ2UucG5n\" width=\"476\" height=\"186\">\n\n- The following will appear with a response and request header:\n    \n\n<img src=\"https://content.pstmn.io/483c360e-917b-458e-9d73-489194763122/aW1hZ2UucG5n\" width=\"408\" height=\"483\">\n\n- Copy the content of both the response AND request into a text document, clearly labelled with the name of the request\n- Do this for each request sent\n- You will now have a file with the request and response for each request in text format as well as the downloaded file in json format as evidence\n    \n\n## Further help\n\nIf you'd like further help on using postman, visit the Postman learning centre: [https://learning.postman.com/docs/introduction/overview/](https://)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -576,9 +576,9 @@
 													"});\r",
 													"\r",
 													"//Verify response header X-Request-ID\r",
-													"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", function () {\r",
+													"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
 													"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
-													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
@@ -957,13 +957,13 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/MedicationRequest/{{MedicationRequestId}}",
+											"raw": "{{baseUrl}}/MedicationRequest/InvalidMedicationRequest",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"MedicationRequest",
-												"{{MedicationRequestId}}"
+												"InvalidMedicationRequest"
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -1164,13 +1164,13 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/MedicationRequest/825fabd0-23dd-4f4c-adce-4a7ac2c",
+											"raw": "{{baseUrl}}/MedicationRequest/825fabd0-23dd-",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"MedicationRequest",
-												"825fabd0-23dd-4f4c-adce-4a7ac2c"
+												"825fabd0-23dd-"
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -1961,9 +1961,9 @@
 													"});\r",
 													"\r",
 													"//Verify response header X-Request-ID\r",
-													"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", function () {\r",
+													"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
 													"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
-													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
 													"});\r",
 													"\r",
 													"//Verify response header content-type\r",
@@ -2342,13 +2342,13 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/PractitionerRole/825fabd0-23dd-4f4c-adce-4a7ac2c",
+											"raw": "{{baseUrl}}/PractitionerRole/825fabd0-23dd-",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"PractitionerRole",
-												"825fabd0-23dd-4f4c-adce-4a7ac2c"
+												"825fabd0-23dd-"
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -2891,7 +2891,7 @@
 															"                                },\r",
 															"                                \"status\": {\r",
 															"                                    \"type\": \"string\",\r",
-															"                                    \"enum\": [\"active\", \"stopped\", \"complete\"]\r",
+															"                                    \"enum\": [\"active\", \"stopped\", \"completed\"]\r",
 															"                                },\r",
 															"                                \"medicationCodeableConcept\": {\r",
 															"                                    \"type\": \"object\",\r",
@@ -2950,7 +2950,7 @@
 															"                                            \"format\": \"date\"\r",
 															"                                        },\r",
 															"                                    },\r",
-															"                                    \"required\": [\"start\", \"end\"]\r",
+															"                                    \"required\": [\"start\"]\r",
 															"                                },\r",
 															"                                \"dateAsserted\": {\r",
 															"                                    \"type\": \"string\"\r",
@@ -3088,9 +3088,9 @@
 															"});\r",
 															"\r",
 															"//Verify response header X-Request-ID\r",
-															"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", function () {\r",
+															"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
 															"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
-															"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+															"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
@@ -4640,7 +4640,7 @@
 															"                                                        },\r",
 															"                                                        \"valueDateTime\": {\r",
 															"                                                            \"type\": \"string\",\r",
-															"                                                            \"format\": \"date-time\"\r",
+															"                                                            \"format\": \"date\"\r",
 															"                                                        }\r",
 															"                                                    },\r",
 															"                                                }\r",
@@ -4741,7 +4741,7 @@
 															"                                        \"required\": [\"reference\"]\r",
 															"                                    }\r",
 															"                                },\r",
-															"                                \"groupIdentifier\": {\r",
+															"                               /* \"groupIdentifier\": {\r",
 															"                                    \"type\": \"object\",\r",
 															"                                    \"properties\": {\r",
 															"                                        \"system\": {\r",
@@ -4753,7 +4753,7 @@
 															"                                        }\r",
 															"                                    },\r",
 															"                                    \"required\": [\"system\", \"value\"]\r",
-															"                                },\r",
+															"                                },*/\r",
 															"                                \"courseOfTherapyType\": {\r",
 															"                                    \"type\": \"object\",\r",
 															"                                    \"properties\": {\r",
@@ -4826,9 +4826,9 @@
 															"                                \"dispenseRequest\": {\r",
 															"                                    \"type\": \"object\",\r",
 															"                                    \"properties\": {\r",
-															"                                        \"numberOfRepeatsAllowed\": {\r",
+															"                                        /*\"numberOfRepeatsAllowed\": {\r",
 															"                                            \"type\": \"number\"\r",
-															"                                        },\r",
+															"                                        },*/\r",
 															"                                        \"quantity\": {\r",
 															"                                            \"type\": \"object\",\r",
 															"                                            \"properties\": {\r",
@@ -4853,7 +4853,7 @@
 															"                                                \"code\"\r",
 															"                                            ]\r",
 															"                                        },\r",
-															"                                        \"expectedSupplyDuration\": {\r",
+															"                                       /* \"expectedSupplyDuration\": {\r",
 															"                                            \"type\": \"object\",\r",
 															"                                            \"properties\": {\r",
 															"                                                \"value\": {\r",
@@ -4876,7 +4876,7 @@
 															"                                                \"system\",\r",
 															"                                                \"code\"\r",
 															"                                            ]\r",
-															"                                        },\r",
+															"                                        },*/\r",
 															"                                        \"performer\": {\r",
 															"                                            \"type\": \"object\",\r",
 															"                                            \"properties\": {\r",
@@ -4904,9 +4904,8 @@
 															"                                        },\r",
 															"                                    },\r",
 															"                                    \"required\": [\r",
-															"                                        \"numberOfRepeatsAllowed\",\r",
-															"                                        \"quantity\",\r",
-															"                                        \"expectedSupplyDuration\",\r",
+															"                                        \"quantity\"\r",
+															"                                        \r",
 															"                                    ]\r",
 															"                                }\r",
 															"                            },\r",
@@ -4921,7 +4920,6 @@
 															"                                \"medicationCodeableConcept\",\r",
 															"                                \"subject\",\r",
 															"                                \"authoredOn\",\r",
-															"                                \"groupIdentifier\",\r",
 															"                                \"courseOfTherapyType\",\r",
 															"                                \"substitution\",\r",
 															"                                \"dispenseRequest\"\r",
@@ -4963,13 +4961,13 @@
 															"});\r",
 															"\r",
 															"//if intent = order, populate dispenseRequest.performer\r",
-															"pm.test(\"GIVEN I want to get an existing medication request AND intent equals order, WHEN I send the request, THEN the response contains MedicationRequest.dispenseRequest.performer\", () => {\r",
+															"/*pm.test(\"GIVEN I want to get an existing medication request AND intent equals order, WHEN I send the request, THEN the response contains MedicationRequest.dispenseRequest.performer\", () => {\r",
 															"    arrayOfMedicationRequests.forEach((medicationRequest) => {\r",
 															"        if ( medicationRequest.resource.intent === \"order\") {\r",
 															"            pm.expect(medicationRequest.resource.dispenseRequest).to.have.property(\"performer\")\r",
 															"        }\r",
 															"    })\r",
-															"});\r",
+															"});*/\r",
 															"\r",
 															"//if intent = plan, dispenseRequest.performer should not exist\r",
 															"pm.test(\"GIVEN I want to get an existing medication request AND intent equals plan, WHEN I send the request, THEN the response does not contain MedicationRequest.dispenseRequest.performer\", () => {\r",
@@ -5000,7 +4998,7 @@
 															"            if (medicationRequest.resource.intent === \"order\") {\r",
 															"                var extension = medicationRequest.resource.extension[0].extension\r",
 															"                var authorisationExpiryDate = extension.some(extension => extension.url === \"authorisationExpiryDate\")\r",
-															"                pm.expect(authorisationExpiryDate).to.eql(false)\r",
+															"                pm.expect(authorisationExpiryDate).to.eql(true)\r",
 															"            }\r",
 															"        }\r",
 															"    })\r",
@@ -5009,10 +5007,12 @@
 															"//if extension exists, number of repeat prescriptions should exist\r",
 															"pm.test(\"GIVEN I want to get an existing medication request AND therapy type is either continuous or continuous-repeat-dispensing, WHEN I send the request, THEN the url value of one of the objects in the extension array = numberOfPrescriptionsIssued \", () => {\r",
 															"    arrayOfMedicationRequests.forEach((medicationRequest) => {\r",
-															"        if (medicationRequest.resource.hasOwnProperty(\"extension\")) {\r",
+															"        if (medicationRequest.resource.intent === \"plan\") {\r",
+															"        if (medicationRequest.resource.hasOwnProperty(\"extension\")) { \r",
 															"            var extension = medicationRequest.resource.extension[0].extension\r",
 															"            var numberOfRepeatPrescriptionsIssued = extension.some(extension => extension.url === \"numberOfPrescriptionsIssued\")\r",
 															"            pm.expect(numberOfRepeatPrescriptionsIssued).to.eql(true)\r",
+															"        }\r",
 															"        }\r",
 															"    })\r",
 															"});\r",
@@ -5109,9 +5109,9 @@
 															"});\r",
 															"\r",
 															"//Verify response header X-Request-ID\r",
-															"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", function () {\r",
+															"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
 															"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
-															"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+															"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
 															"});\r",
 															"\r",
 															"//Verify response header content-type\r",
@@ -9470,7 +9470,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{taskIdPrescription}}",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id={{taskIdPrescription}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -9478,6 +9478,10 @@
 										"Task"
 									],
 									"query": [
+										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
 										{
 											"key": "id",
 											"value": "{{taskIdPrescription}}"
@@ -9489,7 +9493,7 @@
 							"response": []
 						},
 						{
-							"name": "Get requested prescription reorders: Task:focus:MedicationRequest",
+							"name": "Get requested prescription reorders: Task:focus:MedicationRequest: taskid",
 							"event": [
 								{
 									"listen": "test",
@@ -9892,7 +9896,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{taskIdPrescription&Pharmacy}}&_include:Task:focus:MedicationRequest",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id={{taskIdPrescription}}&_include=Task:focus:MedicationRequest",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -9901,12 +9905,442 @@
 									],
 									"query": [
 										{
-											"key": "id",
-											"value": "{{taskIdPrescription&Pharmacy}}"
+											"key": "patient",
+											"value": "{{PatientId}}"
 										},
 										{
-											"key": "_include:Task:focus:MedicationRequest",
-											"value": null
+											"key": "id",
+											"value": "{{taskIdPrescription}}"
+										},
+										{
+											"key": "_include",
+											"value": "Task:focus:MedicationRequest"
+										}
+									]
+								},
+								"description": "## Overview\n\nUse this end point to check the status of past and current prescription request.\n\nIf a Patient identifier is provided past and present requests will be returned for the patient inside as multiple Task rescources inside a Bundle resource.\n\nIf just the id of a specific request is passed a singular Task resource will be returned inside a Bundle resource.\n\nIf the prescription request is then sent to EPS to be fulfilled the EPS id of the new MedicationRequest must be included in the output element of the Task resource. \n\nYou must provide at least one of the following parameters:\n\n* id\n\n* patient\n"
+							},
+							"response": []
+						},
+						{
+							"name": "Get requested prescription reorders: Task:focus:MedicationRequest: patient id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"//Verify the response status code\r",
+											"pm.test(\"GIVEN I provide an existing valid taskId prescription&Pharmacy, WHEN I send the request, THEN the status code response is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//Verify response header X-Correlation-ID\r",
+											"pm.test(\"GIVEN I provide an X-Correlation-ID in the header, WHEN I send the request, THEN the same X-Correlation-ID is returned in the response header\", () => {\r",
+											"    var XCorrelationID = pm.variables.get(\"X-Correlation-ID\");\r",
+											"    pm.expect(pm.response.headers.get(\"X-Correlation-ID\")).to.eql(XCorrelationID);\r",
+											"});\r",
+											"\r",
+											"//Verify response header X-Request-ID\r",
+											"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", () => {\r",
+											"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
+											"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+											"});\r",
+											"\r",
+											"//Verify response header content-type\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json; charset=utf-8')\r",
+											"});\r",
+											"\r",
+											"//Verify response schema\r",
+											"pm.test(\"GIVEN I send a task request, WHEN the response is returned, THEN the json response corresponds to the required task schema\", () => {\r",
+											"    var schema = {\r",
+											"        \"type\": \"object\",\r",
+											"        \"properties\": {\r",
+											"            \"resourceType\": {\r",
+											"                \"type\": \"string\",\r",
+											"                \"const\": \"Bundle\"\r",
+											"            },\r",
+											"            \"id\": {\r",
+											"                \"type\": \"string\",\r",
+											"                \"format\": \"uuid\"\r",
+											"            },\r",
+											"            \"entry\": {\r",
+											"                \"type\": \"array\",\r",
+											"                \"items\": {\r",
+											"                    \"properties\": {\r",
+											"                        \"resource\": {\r",
+											"                            \"type\": \"object\",\r",
+											"                            \"properties\": {\r",
+											"                                \"resourceType\": {\r",
+											"                                    \"type\": \"string\",\r",
+											"                                    \"const\": \"Task\"\r",
+											"                                },\r",
+											"                                \"id\": {\r",
+											"                                    \"type\": \"string\",\r",
+											"                                    \"format\": \"uuid\"\r",
+											"                                },\r",
+											"                                \"meta\": {\r",
+											"                                    \"type\": \"object\",\r",
+											"                                    \"properties\": {\r",
+											"                                        \"profile\": {\r",
+											"                                            \"type\": \"array\",\r",
+											"                                            \"minItems\": 1,\r",
+											"                                            \"maxItems\": 1,\r",
+											"                                            \"items\": {\r",
+											"                                                \"type\": \"string\",\r",
+											"                                                \"const\": \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Task\"\r",
+											"                                            }\r",
+											"                                        }\r",
+											"                                    },\r",
+											"                                    \"required\": [\r",
+											"                                        \"profile\"\r",
+											"                                    ]\r",
+											"                                },\r",
+											"                                \"identifier\": {\r",
+											"                                    \"type\": \"array\",\r",
+											"                                    \"items\": {\r",
+											"                                        \"properties\": {\r",
+											"                                            \"system\": {\r",
+											"                                                \"type\": \"string\"\r",
+											"                                            },\r",
+											"                                            \"value\": {\r",
+											"                                                \"type\": \"string\",\r",
+											"                                                \"format\": \"uuid\"\r",
+											"                                            }\r",
+											"                                        },\r",
+											"                                        \"required\": [\r",
+											"                                            \"value\"\r",
+											"                                        ]\r",
+											"                                    }\r",
+											"                                },\r",
+											"                                \"status\": {\r",
+											"                                    \"type\": \"string\",\r",
+											"                                    \"enum\": [\r",
+											"                                        \"requested\",\r",
+											"                                        \"accepted\",\r",
+											"                                        \"rejected\",\r",
+											"                                        \"cancelled\",\r",
+											"                                        \"in-progress\",\r",
+											"                                        \"completed\",\r",
+											"                                        \"failed\"\r",
+											"                                    ]\r",
+											"                                },\r",
+											"                                \"statusReason\": {\r",
+											"                                    \"type\": \"object\",\r",
+											"                                    \"properties\": {\r",
+											"                                        \"text\": {\r",
+											"                                            \"type\": \"string\"\r",
+											"                                        }\r",
+											"                                    },\r",
+											"                                    \"required\": [\r",
+											"                                        \"text\"\r",
+											"                                    ]\r",
+											"                                },\r",
+											"                                \"intent\": {\r",
+											"                                    \"type\": \"string\",\r",
+											"                                    \"const\": \"order\"\r",
+											"                                },\r",
+											"                                \"code\": {\r",
+											"                                    \"type\": \"object\",\r",
+											"                                    \"properties\": {\r",
+											"                                        \"coding\": {\r",
+											"                                            \"type\": \"array\",\r",
+											"                                            \"minItems\": 1,\r",
+											"                                            \"maxItems\": 1,\r",
+											"                                            \"items\": {\r",
+											"                                                \"properties\": {\r",
+											"                                                    \"system\": {\r",
+											"                                                        \"type\": \"string\",\r",
+											"                                                        \"const\": \"http://snomed.info/sct\"\r",
+											"                                                    },\r",
+											"                                                    \"code\": {\r",
+											"                                                        \"type\": \"string\",\r",
+											"                                                        \"const\": \"103742009\"\r",
+											"                                                    },\r",
+											"                                                    \"display\": {\r",
+											"                                                        \"type\": \"string\",\r",
+											"                                                        \"const\": \"Renewal of prescription\"\r",
+											"                                                    }\r",
+											"                                                },\r",
+											"                                                \"required\": [\r",
+											"                                                    \"system\",\r",
+											"                                                    \"code\",\r",
+											"                                                    \"display\"\r",
+											"                                                ]\r",
+											"                                            }\r",
+											"                                        }\r",
+											"                                    },\r",
+											"                                    \"required\": [\r",
+											"                                        \"coding\"\r",
+											"                                    ]\r",
+											"                                },\r",
+											"                                \"focus\": {\r",
+											"                                    \"type\": \"object\",\r",
+											"                                    \"properties\": {\r",
+											"                                        \"reference\": {\r",
+											"                                            \"type\": \"string\"\r",
+											"                                        }\r",
+											"                                    },\r",
+											"                                    \"required\": [\r",
+											"                                        \"reference\"\r",
+											"                                    ]\r",
+											"                                },\r",
+											"                                \"for\": {\r",
+											"                                    \"type\": \"object\",\r",
+											"                                    \"properties\": {\r",
+											"                                        \"reference\": {\r",
+											"                                            \"type\": \"string\"\r",
+											"                                        }\r",
+											"                                    },\r",
+											"                                    \"required\": [\r",
+											"                                        \"reference\"\r",
+											"                                    ]\r",
+											"                                },\r",
+											"                                \"authoredOn\": {\r",
+											"                                    \"type\": \"string\",\r",
+											"                                    \"format\": \"date-time\"\r",
+											"                                },\r",
+											"                                \"lastModified\": {\r",
+											"                                    \"type\": \"string\",\r",
+											"                                    \"format\": \"date-time\"\r",
+											"                                },\r",
+											"                                \"requester\": {\r",
+											"                                    \"type\": \"object\",\r",
+											"                                    \"properties\": {\r",
+											"                                        \"reference\": {\r",
+											"                                            \"type\": \"string\"\r",
+											"                                        }\r",
+											"                                    },\r",
+											"                                    \"required\": [\r",
+											"                                        \"reference\"\r",
+											"                                    ]\r",
+											"                                },\r",
+											"                                \"note\": {\r",
+											"                                    \"type\": \"array\",\r",
+											"                                    \"items\": {\r",
+											"                                        \"properties\": {\r",
+											"                                            \"text\": {\r",
+											"                                                \"type\": \"string\"\r",
+											"                                            }\r",
+											"                                        },\r",
+											"                                        \"required\": [\"text\"]\r",
+											"                                    }\r",
+											"                                },\r",
+											"                                \"input\": {\r",
+											"                                    \"type\": \"array\",\r",
+											"                                    \"items\": {\r",
+											"                                        \"properties\": {\r",
+											"                                            \"type\": {\r",
+											"                                                \"type\": \"object\",\r",
+											"                                                \"properties\": {\r",
+											"                                                    \"coding\": {\r",
+											"                                                        \"type\": \"array\",\r",
+											"                                                        \"items\": {\r",
+											"                                                            \"properties\": {\r",
+											"                                                                \"system\": {\r",
+											"                                                                    \"type\": \"string\",\r",
+											"                                                                    \"const\": \"https://fhir.hl7.org.uk/GPConnect-PrescriptionOrderingParameters\"\r",
+											"                                                                },\r",
+											"                                                                \"code\": {\r",
+											"                                                                    \"type\": \"string\",\r",
+											"                                                                    \"const\": \"preferred-performer\"\r",
+											"                                                                },\r",
+											"                                                                \"display\": {\r",
+											"                                                                    \"type\": \"string\",\r",
+											"                                                                    \"const\": \"Preferred performer\"\r",
+											"                                                                }\r",
+											"                                                            },\r",
+											"                                                            \"required\": [\r",
+											"                                                                \"code\"\r",
+											"                                                            ]\r",
+											"                                                        }\r",
+											"                                                    }\r",
+											"                                                },\r",
+											"                                                \"required\": [\r",
+											"                                                    \"coding\"\r",
+											"                                                ]\r",
+											"                                            },\r",
+											"                                            \"valueIdentifier\": {\r",
+											"                                                \"type\": \"object\",\r",
+											"                                                \"properties\": {\r",
+											"                                                    \"system\": {\r",
+											"                                                        \"type\": \"string\",\r",
+											"                                                        \"const\": \"https://fhir.nhs.uk/Id/ods-organization-code\"\r",
+											"                                                    },\r",
+											"                                                    \"value\": {\r",
+											"                                                        \"type\": \"string\"\r",
+											"                                                    }\r",
+											"                                                },\r",
+											"                                                \"required\": [\r",
+											"                                                    \"value\"\r",
+											"                                                ]\r",
+											"                                            }\r",
+											"                                        }\r",
+											"                                    },\r",
+											"                                    \"required\": [\"type\", \"valueIdentifier\"]\r",
+											"                                },\r",
+											"                                \"output\": {\r",
+											"                                    \"type\": \"array\",\r",
+											"                                    \"items\": {\r",
+											"                                        \"properties\": {\r",
+											"                                            \"type\": {\r",
+											"                                                \"type\": \"object\",\r",
+											"                                                \"properties\": {\r",
+											"                                                    \"coding\": {\r",
+											"                                                        \"type\": \"array\",\r",
+											"                                                        \"items\": {\r",
+											"                                                            \"properties\": {\r",
+											"                                                                \"system\": {\r",
+											"                                                                    \"type\": \"string\",\r",
+											"                                                                    \"const\": \"https://fhir.hl7.org.uk/GPConnect-PrescriptionOrderingParameters\"\r",
+											"                                                                },\r",
+											"                                                                \"code\": {\r",
+											"                                                                    \"type\": \"string\",\r",
+											"                                                                    \"const\": \"sent-to-eps\"\r",
+											"                                                                },\r",
+											"                                                                \"display\": {\r",
+											"                                                                    \"type\": \"string\",\r",
+											"                                                                    \"const\": \"Sent to EPS\"\r",
+											"                                                                }\r",
+											"                                                            },\r",
+											"                                                            \"required\": [\r",
+											"                                                                \"system\", \"code\", \"display\"\r",
+											"                                                            ]\r",
+											"                                                        }\r",
+											"                                                    }\r",
+											"                                                },\r",
+											"                                                \"required\": [\r",
+											"                                                    \"coding\"\r",
+											"                                                ]\r",
+											"                                            },\r",
+											"                                            \"valueIdentifier\": {\r",
+											"                                                \"type\": \"object\",\r",
+											"                                                \"properties\": {\r",
+											"                                                    \"system\": {\r",
+											"                                                        \"type\": \"string\",\r",
+											"                                                        \"const\": \"https://fhir.nhs.uk/Id/prescription-order-item-number\"\r",
+											"                                                    },\r",
+											"                                                    \"value\": {\r",
+											"                                                        \"type\": \"string\",\r",
+											"                                                        \"format\": \"uuid\"\r",
+											"                                                    }\r",
+											"                                                },\r",
+											"                                                \"required\": [\r",
+											"                                                    \"value\"\r",
+											"                                                ]\r",
+											"                                            }\r",
+											"                                        },\r",
+											"                                        \"required\": [\"type\", \"valueIdentifier\"]\r",
+											"                                    },\r",
+											"                                }\r",
+											"                            },\r",
+											"                            \"required\": [\r",
+											"                                \"resourceType\",\r",
+											"                                \"id\",\r",
+											"                                \"meta\",\r",
+											"                                \"identifier\",\r",
+											"                                \"status\",\r",
+											"                                \"intent\",\r",
+											"                                \"code\",\r",
+											"                                \"focus\",\r",
+											"                                \"for\",\r",
+											"                                \"authoredOn\",\r",
+											"                                \"requester\"\r",
+											"                            ]\r",
+											"                        },\r",
+											"                    },\r",
+											"                    \"required\": [\r",
+											"                        \"resource\"\r",
+											"                    ]\r",
+											"                }\r",
+											"            },\r",
+											"        },\r",
+											"        \"required\": [\r",
+											"            \"resourceType\",\r",
+											"            \"id\",\r",
+											"            \"entry\"\r",
+											"        ]\r",
+											"    }\r",
+											"    pm.response.to.have.jsonSchema(schema);\r",
+											"});\r",
+											"\r",
+											"var arrayTasks = jsonData.entry\r",
+											"//Verify that focus.reference points to a MedicationRequest\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN focus.reference should contain/point towards MedicationRequest\", () => {\r",
+											"    arrayTasks.forEach((task) => {\r",
+											"        var ref = task.resource.focus.reference\r",
+											"        pm.expect(ref.includes(\"MedicationRequest/\")).to.eql(true)\r",
+											"    })\r",
+											"});\r",
+											"\r",
+											"//Verify that for.reference points to the Patient in the request\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN for.reference should contain/point towards the same patient as in the request\", () => {\r",
+											"    arrayTasks.forEach((task) => {\r",
+											"        var patientId = pm.variables.get(\"PatientId\");\r",
+											"        var ref = task.resource.for.reference\r",
+											"        pm.expect(ref).to.eql(\"Patient/\" + patientId)\r",
+											"    })\r",
+											"});\r",
+											"\r",
+											"//Verify that requester.reference points to the Patient in the request\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN requester.reference should contain/point towards the same patient as in the request\", () => {\r",
+											"    arrayTasks.forEach((task) => {\r",
+											"        var patientId = pm.variables.get(\"PatientId\");\r",
+											"        var ref = task.resource.requester.reference\r",
+											"        pm.expect(ref).to.eql(\"Patient/\" + patientId)\r",
+											"    })\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.\nMirrored back in a response header.\n",
+										"key": "X-Correlation-ID",
+										"value": "{{X-Correlation-ID}}"
+									},
+									{
+										"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
+										"key": "X-Request-ID",
+										"value": "{{X-Request-ID}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/fhir+json; charset=utf-8"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&_include=Task:focus:MedicationRequest",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Task"
+									],
+									"query": [
+										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
+										{
+											"key": "_include",
+											"value": "Task:focus:MedicationRequest"
 										}
 									]
 								},
@@ -10730,9 +11164,9 @@
 											"});\r",
 											"\r",
 											"//Verify response header X-Request-ID\r",
-											"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", function () {\r",
+											"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
 											"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
-											"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+											"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
 											"});\r",
 											"\r",
 											"//Verify response header content-type\r",
@@ -11111,7 +11545,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&_include:Task:focus:MedicationStatement",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&_include=Task:focus:MedicationStatement",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -11125,8 +11559,8 @@
 											"description": "The NHS number of the patient whose requests you are searching for\n"
 										},
 										{
-											"key": "_include:Task:focus:MedicationStatement",
-											"value": null
+											"key": "_include",
+											"value": "Task:focus:MedicationStatement"
 										}
 									]
 								},
@@ -11325,7 +11759,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&_include:Task:focus:MedicationStatement",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&_include=Task:focus:MedicationStatement",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -11339,8 +11773,8 @@
 											"description": "The NHS number of the patient whose requests you are searching for\n"
 										},
 										{
-											"key": "_include:Task:focus:MedicationStatement",
-											"value": null
+											"key": "_include",
+											"value": "Task:focus:MedicationStatement"
 										}
 									]
 								},
@@ -11539,7 +11973,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&_include:Task:focus:MedicationStatement",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&_include=Task:focus:MedicationStatement",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -11553,8 +11987,8 @@
 											"description": "The NHS number of the patient whose requests you are searching for\n"
 										},
 										{
-											"key": "_include:Task:focus:MedicationStatement",
-											"value": null
+											"key": "_include",
+											"value": "Task:focus:MedicationStatement"
 										}
 									]
 								},
@@ -12593,7 +13027,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id=invalidUuid",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id=invalidUuid",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -12601,6 +13035,10 @@
 										"Task"
 									],
 									"query": [
+										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
 										{
 											"key": "id",
 											"value": "invalidUuid"
@@ -12802,7 +13240,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id=825fabd0-23dd-4f4c-adce-4a7ac2c",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id=825fabd0-23dd-4f4c-adce-4a7ac2c",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -12810,6 +13248,10 @@
 										"Task"
 									],
 									"query": [
+										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
 										{
 											"key": "id",
 											"value": "825fabd0-23dd-4f4c-adce-4a7ac2c"
@@ -13011,7 +13453,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id=825fabd023dd4f4cadce4a7ac2c71659",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id=825fabd023dd4f4cadce4a7ac2c71659",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -13019,6 +13461,10 @@
 										"Task"
 									],
 									"query": [
+										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
 										{
 											"key": "id",
 											"value": "825fabd023dd4f4cadce4a7ac2c71659"
@@ -13220,7 +13666,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{$guid}}",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id={{$guid}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -13228,6 +13674,10 @@
 										"Task"
 									],
 									"query": [
+										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
 										{
 											"key": "id",
 											"value": "{{$guid}}"
@@ -13429,7 +13879,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{TaskId}}&status=invalidStatus",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id={{taskIdPrescription}}&status=invalidStatus",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -13438,8 +13888,12 @@
 									],
 									"query": [
 										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
+										{
 											"key": "id",
-											"value": "{{TaskId}}"
+											"value": "{{taskIdPrescription}}"
 										},
 										{
 											"key": "status",
@@ -13855,7 +14309,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{TaskId}}&authored-on=qq2022-01-01",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id={{taskIdPrescription}}&authored-on=qq2022-01-01",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -13864,8 +14318,12 @@
 									],
 									"query": [
 										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
+										{
 											"key": "id",
-											"value": "{{TaskId}}"
+											"value": "{{taskIdPrescription}}"
 										},
 										{
 											"key": "authored-on",
@@ -14068,7 +14526,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{TaskId}}&authoredon=eq2022-01-01",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id={{taskIdPrescription}}&authoredon=eq2022-01-01",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -14077,8 +14535,12 @@
 									],
 									"query": [
 										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
+										{
 											"key": "id",
-											"value": "{{TaskId}}"
+											"value": "{{taskIdPrescription}}"
 										},
 										{
 											"key": "authoredon",
@@ -14281,7 +14743,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{TaskId}}&authored-on=eq2045-01-01",
+									"raw": "{{baseUrl}}/Task?patient={{PatientId}}&id={{taskIdPrescription}}&authored-on=eq2045-01-01",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -14290,8 +14752,12 @@
 									],
 									"query": [
 										{
+											"key": "patient",
+											"value": "{{PatientId}}"
+										},
+										{
 											"key": "id",
-											"value": "{{TaskId}}"
+											"value": "{{taskIdPrescription}}"
 										},
 										{
 											"key": "authored-on",
@@ -16018,7 +16484,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"resourceType\": \"Task\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Task\"\r\n        ]\r\n    },\r\n    \"identifier\": [\r\n        {\r\n            \"system\": \"https://tools.ietf.org/html/rfc4122\",\r\n            \"value\": \"30d65c8e-98e8-4806-b6a6-fpwjfkhs729\"\r\n        }\r\n    ],\r\n    \"status\": \"requested\",\r\n    \"intent\": \"order\",\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"103742009\",\r\n                \"display\": \"Renewal of prescription\"\r\n            }\r\n        ]\r\n    },\r\n    \"focus\": {\r\n        \"reference\": \"MedicationRequest/{{MedicationRequestId}}\"\r\n    },\r\n    \"for\": {\r\n        \"reference\": \"Patient/{{PatientId}}\",\r\n        \"identifier\": {\r\n            \"system\": \"https://fhir.nhs.uk/Id/nhs-number\",\r\n            \"value\": \"{{PatientId}}\"\r\n        },\r\n        \"display\": \"{{PatientName}}\"\r\n    },\r\n    \"requester\": {\r\n        \"reference\": \"Patient/{{PatientId}}\",\r\n        \"identifier\": {\r\n            \"system\": \"invalid\",\r\n            \"value\": \"{{PatientId}}\"\r\n        },\r\n        \"display\": \"{{PatientName}}\"\r\n    },\r\n    \"note\": [\r\n        {\r\n            \"authorString\": \"Patient\",\r\n            \"text\": \"ran out of previous prescription\"\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"resourceType\": \"Task\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Task\"\r\n        ]\r\n    },\r\n    \"identifier\": [\r\n        {\r\n            \"system\": \"https://tools.ietf.org/html/rfc4122\",\r\n            \"value\": \"30d65c8e-98e8-4806-b6a6-fpwjfkhs729\"\r\n        }\r\n    ],\r\n    \"status\": \"requested\",\r\n    \"intent\": \"order\",\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"103742009\",\r\n                \"display\": \"Renewal of prescription\"\r\n            }\r\n        ]\r\n    },\r\n    \"focus\": {\r\n        \"reference\": \"MedicationRequest/{{MedicationRequestId}}\"\r\n    },\r\n    \"for\": {\r\n        \"reference\": \"Patient/{{PatientId}}\",\r\n        \"identifier\": {\r\n            \"system\": \"invalid\",\r\n            \"value\": \"{{PatientId}}\"\r\n        },\r\n        \"display\": \"{{PatientName}}\"\r\n    },\r\n    \"requester\": {\r\n        \"reference\": \"Patient/{{PatientId}}\",\r\n        \"identifier\": {\r\n            \"system\": \"invalid\",\r\n            \"value\": \"{{PatientId}}\"\r\n        },\r\n        \"display\": \"{{PatientName}}\"\r\n    },\r\n    \"note\": [\r\n        {\r\n            \"authorString\": \"Patient\",\r\n            \"text\": \"ran out of previous prescription\"\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
