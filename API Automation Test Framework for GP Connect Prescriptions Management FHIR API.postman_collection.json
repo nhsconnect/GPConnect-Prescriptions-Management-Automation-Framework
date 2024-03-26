@@ -537,13 +537,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/MedicationRequest/{{MedicationRequestId}}",
+											"raw": "{{baseUrl}}/MedicationRequest/{{MedicationRequestId}}?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"MedicationRequest",
 												"{{MedicationRequestId}}"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -750,13 +757,450 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/MedicationRequest/{{MedicationRequestId}}",
+											"raw": "{{baseUrl}}/MedicationRequest/{{MedicationRequestId}}?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"MedicationRequest",
 												"{{MedicationRequestId}}"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
+											]
+										},
+										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
+									},
+									"response": []
+								},
+								{
+									"name": "Error: Invalid NHS number format - 400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();\r",
+													"\r",
+													"//Verify the response status code\r",
+													"pm.test(\"GIVEN I send an incorrect X-Request-ID, WHEN I send the request, THEN the status code response is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Correlation-ID\r",
+													"pm.test(\"GIVEN I provide an X-Correlation-ID in the header, WHEN I send the request, THEN the same X-Correlation-ID is returned in the response header\", function () {\r",
+													"    var XCorrelationID = pm.variables.get(\"X-Correlation-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Correlation-ID\")).to.eql(XCorrelationID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Request-ID\r",
+													"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
+													"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header content-type\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json; charset=utf-8')\r",
+													"});\r",
+													"\r",
+													"//Verify response schema\r",
+													"/*pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
+													"    var schema = {\r",
+													"        \"type\": \"object\",\r",
+													"        \"properties\": {\r",
+													"            \"resourceType\": {\r",
+													"                \"type\": \"string\",\r",
+													"                \"const\": \"OperationOutcome\"\r",
+													"            },\r",
+													"            \"id\": {\r",
+													"                \"type\": \"string\"\r",
+													"            },\r",
+													"            \"meta\": {\r",
+													"                \"type\": \"object\",\r",
+													"                \"properties\": {\r",
+													"                    \"profile\": {\r",
+													"                        \"type\": \"array\",\r",
+													"                        \"minItems\": 1,\r",
+													"                        \"maxItems\": 1,\r",
+													"                        \"items\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"const\": \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\"profile\"]\r",
+													"            },\r",
+													"            \"issue\": {\r",
+													"                \"type\": \"array\",\r",
+													"                \"items\": {\r",
+													"                    \"properties\": {\r",
+													"                        \"id\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"severity\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"fatal\",\r",
+													"                                \"error\",\r",
+													"                                \"warning\",\r",
+													"                                \"information\"\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"code\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"invalid\",\r",
+													"                                \"structure\",\r",
+													"                                \"required\",\r",
+													"                                \"value\",\r",
+													"                                \"invariant\",\r",
+													"                                \"security\",\r",
+													"                                \"login\",\r",
+													"                                \"unknown\",\r",
+													"                                \"expired\",\r",
+													"                                \"forbidden\",\r",
+													"                                \"suppressed\",\r",
+													"                                \"processing\",\r",
+													"                                \"not-supported\",\r",
+													"                                \"duplicate\",\r",
+													"                                \"not-found\",\r",
+													"                                \"too-long\",\r",
+													"                                \"code-invalid\",\r",
+													"                                \"extension\",\r",
+													"                                \"too-costly\",\r",
+													"                                \"business-rule\",\r",
+													"                                \"conflict\",\r",
+													"                                \"incomplete\",\r",
+													"                                \"transient\",\r",
+													"                                \"lock-error\",\r",
+													"                                \"no-store\",\r",
+													"                                \"exception\",\r",
+													"                                \"timeout\",\r",
+													"                                \"throttled\",\r",
+													"                                \"informational\",\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"details\": {\r",
+													"                            \"type\": \"object\",\r",
+													"                            \"properties\": {\r",
+													"                                \"coding\": {\r",
+													"                                    \"type\": \"array\",\r",
+													"                                    \"minItems\": 1,\r",
+													"                                    \"items\": {\r",
+													"                                        \"properties\": {\r",
+													"                                            \"system\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            },\r",
+													"                                            \"code\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                                \"const\" : \"BAD_REQUEST\",\r",
+													"                                            },\r",
+													"                                            \"display\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            }\r",
+													"                                        },\r",
+													"                                        \"required\": [\r",
+													"                                            \"system\",\r",
+													"                                            \"code\",\r",
+													"                                            \"display\"\r",
+													"                                        ]\r",
+													"                                    }\r",
+													"                                }\r",
+													"                            }\r",
+													"                        },\r",
+													"                        \"diagnostics\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"expression\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\r",
+													"                    \"severity\",\r",
+													"                    \"code\",\r",
+													"                ]\r",
+													"            }\r",
+													"        },\r",
+													"        \"required\": [\r",
+													"            \"resourceType\",\r",
+													"            \"meta\",\r",
+													"            \"issue\"\r",
+													"        ]\r",
+													"    }\r",
+													"    pm.response.to.have.jsonSchema(schema);\r",
+													"});*/"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"description": "An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.\nMirrored back in a response header.\n",
+												"key": "X-Correlation-ID",
+												"value": "{{X-Correlation-ID}}"
+											},
+											{
+												"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
+												"key": "X-Request-ID",
+												"value": "{{X-Request-ID}}",
+												"disabled": true
+											},
+											{
+												"key": "Accept",
+												"value": "application/fhir+json; charset=utf-8"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/MedicationRequest/{{MedicationRequestId}}?patient=12345yt@5",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"MedicationRequest",
+												"{{MedicationRequestId}}"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "12345yt@5",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
+											]
+										},
+										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
+									},
+									"response": []
+								},
+								{
+									"name": "Error: Invalid NHS number check digit test- 400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();\r",
+													"\r",
+													"//Verify the response status code\r",
+													"pm.test(\"GIVEN I send an incorrect X-Request-ID, WHEN I send the request, THEN the status code response is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Correlation-ID\r",
+													"pm.test(\"GIVEN I provide an X-Correlation-ID in the header, WHEN I send the request, THEN the same X-Correlation-ID is returned in the response header\", function () {\r",
+													"    var XCorrelationID = pm.variables.get(\"X-Correlation-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Correlation-ID\")).to.eql(XCorrelationID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Request-ID\r",
+													"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
+													"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header content-type\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json; charset=utf-8')\r",
+													"});\r",
+													"\r",
+													"//Verify response schema\r",
+													"/*pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
+													"    var schema = {\r",
+													"        \"type\": \"object\",\r",
+													"        \"properties\": {\r",
+													"            \"resourceType\": {\r",
+													"                \"type\": \"string\",\r",
+													"                \"const\": \"OperationOutcome\"\r",
+													"            },\r",
+													"            \"id\": {\r",
+													"                \"type\": \"string\"\r",
+													"            },\r",
+													"            \"meta\": {\r",
+													"                \"type\": \"object\",\r",
+													"                \"properties\": {\r",
+													"                    \"profile\": {\r",
+													"                        \"type\": \"array\",\r",
+													"                        \"minItems\": 1,\r",
+													"                        \"maxItems\": 1,\r",
+													"                        \"items\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"const\": \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\"profile\"]\r",
+													"            },\r",
+													"            \"issue\": {\r",
+													"                \"type\": \"array\",\r",
+													"                \"items\": {\r",
+													"                    \"properties\": {\r",
+													"                        \"id\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"severity\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"fatal\",\r",
+													"                                \"error\",\r",
+													"                                \"warning\",\r",
+													"                                \"information\"\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"code\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"invalid\",\r",
+													"                                \"structure\",\r",
+													"                                \"required\",\r",
+													"                                \"value\",\r",
+													"                                \"invariant\",\r",
+													"                                \"security\",\r",
+													"                                \"login\",\r",
+													"                                \"unknown\",\r",
+													"                                \"expired\",\r",
+													"                                \"forbidden\",\r",
+													"                                \"suppressed\",\r",
+													"                                \"processing\",\r",
+													"                                \"not-supported\",\r",
+													"                                \"duplicate\",\r",
+													"                                \"not-found\",\r",
+													"                                \"too-long\",\r",
+													"                                \"code-invalid\",\r",
+													"                                \"extension\",\r",
+													"                                \"too-costly\",\r",
+													"                                \"business-rule\",\r",
+													"                                \"conflict\",\r",
+													"                                \"incomplete\",\r",
+													"                                \"transient\",\r",
+													"                                \"lock-error\",\r",
+													"                                \"no-store\",\r",
+													"                                \"exception\",\r",
+													"                                \"timeout\",\r",
+													"                                \"throttled\",\r",
+													"                                \"informational\",\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"details\": {\r",
+													"                            \"type\": \"object\",\r",
+													"                            \"properties\": {\r",
+													"                                \"coding\": {\r",
+													"                                    \"type\": \"array\",\r",
+													"                                    \"minItems\": 1,\r",
+													"                                    \"items\": {\r",
+													"                                        \"properties\": {\r",
+													"                                            \"system\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            },\r",
+													"                                            \"code\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                                \"const\" : \"BAD_REQUEST\",\r",
+													"                                            },\r",
+													"                                            \"display\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            }\r",
+													"                                        },\r",
+													"                                        \"required\": [\r",
+													"                                            \"system\",\r",
+													"                                            \"code\",\r",
+													"                                            \"display\"\r",
+													"                                        ]\r",
+													"                                    }\r",
+													"                                }\r",
+													"                            }\r",
+													"                        },\r",
+													"                        \"diagnostics\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"expression\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\r",
+													"                    \"severity\",\r",
+													"                    \"code\",\r",
+													"                ]\r",
+													"            }\r",
+													"        },\r",
+													"        \"required\": [\r",
+													"            \"resourceType\",\r",
+													"            \"meta\",\r",
+													"            \"issue\"\r",
+													"        ]\r",
+													"    }\r",
+													"    pm.response.to.have.jsonSchema(schema);\r",
+													"});*/"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"description": "An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.\nMirrored back in a response header.\n",
+												"key": "X-Correlation-ID",
+												"value": "{{X-Correlation-ID}}"
+											},
+											{
+												"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
+												"key": "X-Request-ID",
+												"value": "{{X-Request-ID}}",
+												"disabled": true
+											},
+											{
+												"key": "Accept",
+												"value": "application/fhir+json; charset=utf-8"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/MedicationRequest/{{MedicationRequestId}}?patient=9658218870",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"MedicationRequest",
+												"{{MedicationRequestId}}"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "9658218870",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -957,13 +1401,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/MedicationRequest/InvalidMedicationRequest",
+											"raw": "{{baseUrl}}/MedicationRequest/InvalidMedicationRequest?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"MedicationRequest",
 												"InvalidMedicationRequest"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -1164,13 +1615,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/MedicationRequest/825fabd0-23dd-",
+											"raw": "{{baseUrl}}/MedicationRequest/825fabd0-23dd-?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"MedicationRequest",
 												"825fabd0-23dd-"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -1371,13 +1829,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/MedicationRequest/825fabd023dd4f4cadce4a7ac2c71659",
+											"raw": "{{baseUrl}}/MedicationRequest/825fabd023dd4f4cadce4a7ac2c71659?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"MedicationRequest",
 												"825fabd023dd4f4cadce4a7ac2c71659"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -1578,13 +2043,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/MedicationRequest/{{$guid}}",
+											"raw": "{{baseUrl}}/MedicationRequest/{{$guid}}?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"MedicationRequest",
 												"{{$guid}}"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -1715,13 +2187,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/PractitionerRole/{{PractitionerId}}",
+											"raw": "{{baseUrl}}/PractitionerRole/{{PractitionerId}}?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"PractitionerRole",
 												"{{PractitionerId}}"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get details of practitioners issuing previous prescriptions.\nThe request must include the following parameter:\n* id\n"
@@ -1927,13 +2406,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/PractitionerRole/InvalidUUID",
+											"raw": "{{baseUrl}}/PractitionerRole/InvalidUUID?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"PractitionerRole",
 												"InvalidUUID"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -2135,13 +2621,450 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/PractitionerRole/InvalidUUID",
+											"raw": "{{baseUrl}}/PractitionerRole/InvalidUUID?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"PractitionerRole",
 												"InvalidUUID"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
+											]
+										},
+										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
+									},
+									"response": []
+								},
+								{
+									"name": "Error: Invalid NHS number format - 400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();\r",
+													"\r",
+													"//Verify the response status code\r",
+													"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Correlation-ID\r",
+													"pm.test(\"GIVEN I provide an X-Correlation-ID in the header, WHEN I send the request, THEN the same X-Correlation-ID is returned in the response header\", function () {\r",
+													"    var XCorrelationID = pm.variables.get(\"X-Correlation-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Correlation-ID\")).to.eql(XCorrelationID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Request-ID\r",
+													"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
+													"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header content-type\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json; charset=utf-8')\r",
+													"});\r",
+													"\r",
+													"//Verify response schema\r",
+													"/*pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
+													"    var schema = {\r",
+													"        \"type\": \"object\",\r",
+													"        \"properties\": {\r",
+													"            \"resourceType\": {\r",
+													"                \"type\": \"string\",\r",
+													"                \"const\": \"OperationOutcome\"\r",
+													"            },\r",
+													"            \"id\": {\r",
+													"                \"type\": \"string\"\r",
+													"            },\r",
+													"            \"meta\": {\r",
+													"                \"type\": \"object\",\r",
+													"                \"properties\": {\r",
+													"                    \"profile\": {\r",
+													"                        \"type\": \"array\",\r",
+													"                        \"minItems\": 1,\r",
+													"                        \"maxItems\": 1,\r",
+													"                        \"items\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"const\": \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\"profile\"]\r",
+													"            },\r",
+													"            \"issue\": {\r",
+													"                \"type\": \"array\",\r",
+													"                \"items\": {\r",
+													"                    \"properties\": {\r",
+													"                        \"id\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"severity\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"fatal\",\r",
+													"                                \"error\",\r",
+													"                                \"warning\",\r",
+													"                                \"information\"\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"code\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"invalid\",\r",
+													"                                \"structure\",\r",
+													"                                \"required\",\r",
+													"                                \"value\",\r",
+													"                                \"invariant\",\r",
+													"                                \"security\",\r",
+													"                                \"login\",\r",
+													"                                \"unknown\",\r",
+													"                                \"expired\",\r",
+													"                                \"forbidden\",\r",
+													"                                \"suppressed\",\r",
+													"                                \"processing\",\r",
+													"                                \"not-supported\",\r",
+													"                                \"duplicate\",\r",
+													"                                \"not-found\",\r",
+													"                                \"too-long\",\r",
+													"                                \"code-invalid\",\r",
+													"                                \"extension\",\r",
+													"                                \"too-costly\",\r",
+													"                                \"business-rule\",\r",
+													"                                \"conflict\",\r",
+													"                                \"incomplete\",\r",
+													"                                \"transient\",\r",
+													"                                \"lock-error\",\r",
+													"                                \"no-store\",\r",
+													"                                \"exception\",\r",
+													"                                \"timeout\",\r",
+													"                                \"throttled\",\r",
+													"                                \"informational\",\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"details\": {\r",
+													"                            \"type\": \"object\",\r",
+													"                            \"properties\": {\r",
+													"                                \"coding\": {\r",
+													"                                    \"type\": \"array\",\r",
+													"                                    \"minItems\": 1,\r",
+													"                                    \"items\": {\r",
+													"                                        \"properties\": {\r",
+													"                                            \"system\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            },\r",
+													"                                            \"code\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                                \"const\" : \"INVALID_PARAMETER\",\r",
+													"                                            },\r",
+													"                                            \"display\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            }\r",
+													"                                        },\r",
+													"                                        \"required\": [\r",
+													"                                            \"system\",\r",
+													"                                            \"code\",\r",
+													"                                            \"display\"\r",
+													"                                        ]\r",
+													"                                    }\r",
+													"                                }\r",
+													"                            }\r",
+													"                        },\r",
+													"                        \"diagnostics\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"expression\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\r",
+													"                    \"severity\",\r",
+													"                    \"code\",\r",
+													"                ]\r",
+													"            }\r",
+													"        },\r",
+													"        \"required\": [\r",
+													"            \"resourceType\",\r",
+													"            \"meta\",\r",
+													"            \"issue\"\r",
+													"        ]\r",
+													"    }\r",
+													"    pm.response.to.have.jsonSchema(schema);\r",
+													"});*/"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"description": "An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.\nMirrored back in a response header.\n",
+												"key": "X-Correlation-ID",
+												"value": "{{X-Correlation-ID}}"
+											},
+											{
+												"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
+												"key": "X-Request-ID",
+												"value": "{{X-Request-ID}}",
+												"disabled": true
+											},
+											{
+												"key": "Accept",
+												"value": "application/fhir+json; charset=utf-8"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/PractitionerRole/InvalidUUID?patient=123AB5465",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"PractitionerRole",
+												"InvalidUUID"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "123AB5465",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
+											]
+										},
+										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
+									},
+									"response": []
+								},
+								{
+									"name": "Error: Invalid NHS number check digit test- 400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();\r",
+													"\r",
+													"//Verify the response status code\r",
+													"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Correlation-ID\r",
+													"pm.test(\"GIVEN I provide an X-Correlation-ID in the header, WHEN I send the request, THEN the same X-Correlation-ID is returned in the response header\", function () {\r",
+													"    var XCorrelationID = pm.variables.get(\"X-Correlation-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Correlation-ID\")).to.eql(XCorrelationID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header X-Request-ID\r",
+													"pm.test(\"GIVEN I don't provide an X-Request-ID in the header, WHEN I send the request, THEN no X-Request-ID is returned in the response header\", function () {\r",
+													"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
+													"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).not.eql(XRequestID);\r",
+													"});\r",
+													"\r",
+													"//Verify response header content-type\r",
+													"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json; charset=utf-8'\", () => {\r",
+													"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json; charset=utf-8')\r",
+													"});\r",
+													"\r",
+													"//Verify response schema\r",
+													"/*pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
+													"    var schema = {\r",
+													"        \"type\": \"object\",\r",
+													"        \"properties\": {\r",
+													"            \"resourceType\": {\r",
+													"                \"type\": \"string\",\r",
+													"                \"const\": \"OperationOutcome\"\r",
+													"            },\r",
+													"            \"id\": {\r",
+													"                \"type\": \"string\"\r",
+													"            },\r",
+													"            \"meta\": {\r",
+													"                \"type\": \"object\",\r",
+													"                \"properties\": {\r",
+													"                    \"profile\": {\r",
+													"                        \"type\": \"array\",\r",
+													"                        \"minItems\": 1,\r",
+													"                        \"maxItems\": 1,\r",
+													"                        \"items\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"const\": \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\"profile\"]\r",
+													"            },\r",
+													"            \"issue\": {\r",
+													"                \"type\": \"array\",\r",
+													"                \"items\": {\r",
+													"                    \"properties\": {\r",
+													"                        \"id\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"severity\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"fatal\",\r",
+													"                                \"error\",\r",
+													"                                \"warning\",\r",
+													"                                \"information\"\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"code\": {\r",
+													"                            \"type\": \"string\",\r",
+													"                            \"enum\": [\r",
+													"                                \"invalid\",\r",
+													"                                \"structure\",\r",
+													"                                \"required\",\r",
+													"                                \"value\",\r",
+													"                                \"invariant\",\r",
+													"                                \"security\",\r",
+													"                                \"login\",\r",
+													"                                \"unknown\",\r",
+													"                                \"expired\",\r",
+													"                                \"forbidden\",\r",
+													"                                \"suppressed\",\r",
+													"                                \"processing\",\r",
+													"                                \"not-supported\",\r",
+													"                                \"duplicate\",\r",
+													"                                \"not-found\",\r",
+													"                                \"too-long\",\r",
+													"                                \"code-invalid\",\r",
+													"                                \"extension\",\r",
+													"                                \"too-costly\",\r",
+													"                                \"business-rule\",\r",
+													"                                \"conflict\",\r",
+													"                                \"incomplete\",\r",
+													"                                \"transient\",\r",
+													"                                \"lock-error\",\r",
+													"                                \"no-store\",\r",
+													"                                \"exception\",\r",
+													"                                \"timeout\",\r",
+													"                                \"throttled\",\r",
+													"                                \"informational\",\r",
+													"                            ]\r",
+													"                        },\r",
+													"                        \"details\": {\r",
+													"                            \"type\": \"object\",\r",
+													"                            \"properties\": {\r",
+													"                                \"coding\": {\r",
+													"                                    \"type\": \"array\",\r",
+													"                                    \"minItems\": 1,\r",
+													"                                    \"items\": {\r",
+													"                                        \"properties\": {\r",
+													"                                            \"system\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            },\r",
+													"                                            \"code\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                                \"const\" : \"INVALID_PARAMETER\",\r",
+													"                                            },\r",
+													"                                            \"display\": {\r",
+													"                                                \"type\": \"string\",\r",
+													"                                            }\r",
+													"                                        },\r",
+													"                                        \"required\": [\r",
+													"                                            \"system\",\r",
+													"                                            \"code\",\r",
+													"                                            \"display\"\r",
+													"                                        ]\r",
+													"                                    }\r",
+													"                                }\r",
+													"                            }\r",
+													"                        },\r",
+													"                        \"diagnostics\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        },\r",
+													"                        \"expression\": {\r",
+													"                            \"type\": \"string\"\r",
+													"                        }\r",
+													"                    }\r",
+													"                },\r",
+													"                \"required\": [\r",
+													"                    \"severity\",\r",
+													"                    \"code\",\r",
+													"                ]\r",
+													"            }\r",
+													"        },\r",
+													"        \"required\": [\r",
+													"            \"resourceType\",\r",
+													"            \"meta\",\r",
+													"            \"issue\"\r",
+													"        ]\r",
+													"    }\r",
+													"    pm.response.to.have.jsonSchema(schema);\r",
+													"});*/"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"description": "An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.\nMirrored back in a response header.\n",
+												"key": "X-Correlation-ID",
+												"value": "{{X-Correlation-ID}}"
+											},
+											{
+												"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
+												"key": "X-Request-ID",
+												"value": "{{X-Request-ID}}",
+												"disabled": true
+											},
+											{
+												"key": "Accept",
+												"value": "application/fhir+json; charset=utf-8"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/PractitionerRole/InvalidUUID?patient=9658218870",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"PractitionerRole",
+												"InvalidUUID"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "9658218870",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -2342,13 +3265,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/PractitionerRole/825fabd0-23dd-",
+											"raw": "{{baseUrl}}/PractitionerRole/825fabd0-23dd-?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"PractitionerRole",
 												"825fabd0-23dd-"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -2550,13 +3480,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/PractitionerRole/825fabd023dd4f4cadce4a7ac2c71659",
+											"raw": "{{baseUrl}}/PractitionerRole/825fabd023dd4f4cadce4a7ac2c71659?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"PractitionerRole",
 												"825fabd023dd4f4cadce4a7ac2c71659"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -2757,13 +3694,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/PractitionerRole/{{$guid}}",
+											"raw": "{{baseUrl}}/PractitionerRole/{{$guid}}?patient={{PatientId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
 												"PractitionerRole",
 												"{{$guid}}"
+											],
+											"query": [
+												{
+													"key": "patient",
+													"value": "{{PatientId}}",
+													"description": "The NHS number of the patient whose requests you are searching for"
+												}
 											]
 										},
 										"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -10724,7 +11668,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{taskIdPrescription}}",
+									"raw": "{{baseUrl}}/Task?id={{taskIdPrescription}}&patient={{PatientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -10735,7 +11679,12 @@
 										{
 											"key": "id",
 											"value": "{{taskIdPrescription}}",
-											"description": "(Required) The id of the Task to cancel\n"
+											"description": "(Required) The id of the Task to cancel"
+										},
+										{
+											"key": "patient",
+											"value": "{{PatientId}}",
+											"description": "The NHS number of the patient whose requests you are searching for"
 										}
 									]
 								},
@@ -11119,7 +12068,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{taskIdPrescription&Pharmacy}}",
+									"raw": "{{baseUrl}}/Task?id={{taskIdPrescription&Pharmacy}}&patient={{PatientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -11130,7 +12079,12 @@
 										{
 											"key": "id",
 											"value": "{{taskIdPrescription&Pharmacy}}",
-											"description": "(Required) The id of the Task to cancel\n"
+											"description": "(Required) The id of the Task to cancel"
+										},
+										{
+											"key": "patient",
+											"value": "{{PatientId}}",
+											"description": "The NHS number of the patient whose requests you are searching for"
 										}
 									]
 								},
@@ -19748,7 +20702,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{$guid}}",
+									"raw": "{{baseUrl}}/Task?id={{$guid}}&patient={{PatientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -19760,6 +20714,11 @@
 											"key": "id",
 											"value": "{{$guid}}",
 											"description": "(Required) The id of the Task to cancel\n"
+										},
+										{
+											"key": "patient",
+											"value": "{{PatientId}}",
+											"description": "The NHS number of the patient whose requests you are searching for"
 										}
 									]
 								},
@@ -19972,7 +20931,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/Task?id=invalidTaskId",
+									"raw": "{{baseUrl}}/Task?id=invalidTaskId&patient={{PatientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -19984,6 +20943,11 @@
 											"key": "id",
 											"value": "invalidTaskId",
 											"description": "(Required) The id of the Task to cancel\n"
+										},
+										{
+											"key": "patient",
+											"value": "{{PatientId}}",
+											"description": "The NHS number of the patient whose requests you are searching for"
 										}
 									]
 								},
@@ -20196,7 +21160,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{TaskId}}",
+									"raw": "{{baseUrl}}/Task?id={{TaskId}}&patient={{PatientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -20208,6 +21172,469 @@
 											"key": "id",
 											"value": "{{TaskId}}",
 											"description": "(Required) The id of the Task to cancel\n"
+										},
+										{
+											"key": "patient",
+											"value": "{{PatientId}}",
+											"description": "The NHS number of the patient whose requests you are searching for"
+										}
+									]
+								},
+								"description": "## Overview\n\nUse this endpoint to cancel a current request that has not been actioned yet.\n\nThe content-type for this request must be \"application/json-patch+json\".\n\nThe request must include the following parameter:\n\n* id\n"
+							},
+							"response": []
+						},
+						{
+							"name": "Error: Invalid NHS number format - 400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"//Verify the response status code\r",
+											"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"//Verify response header X-Correlation-ID\r",
+											"pm.test(\"GIVEN I provide an X-Correlation-ID in the header, WHEN I send the request, THEN the same X-Correlation-ID is returned in the response header\", function () {\r",
+											"    var XCorrelationID = pm.variables.get(\"X-Correlation-ID\");\r",
+											"    pm.expect(pm.response.headers.get(\"X-Correlation-ID\")).to.eql(XCorrelationID);\r",
+											"});\r",
+											"\r",
+											"//Verify response header X-Request-ID\r",
+											"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", function () {\r",
+											"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
+											"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+											"});\r",
+											"\r",
+											"//Verify response header content-type\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json; charset=utf-8')\r",
+											"});\r",
+											"\r",
+											"//Verify response schema\r",
+											"/*pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
+											"    var schema = {\r",
+											"        \"type\": \"object\",\r",
+											"        \"properties\": {\r",
+											"            \"resourceType\": {\r",
+											"                \"type\": \"string\",\r",
+											"                \"const\": \"OperationOutcome\"\r",
+											"            },\r",
+											"            \"id\": {\r",
+											"                \"type\": \"string\"\r",
+											"            },\r",
+											"            \"meta\": {\r",
+											"                \"type\": \"object\",\r",
+											"                \"properties\": {\r",
+											"                    \"profile\": {\r",
+											"                        \"type\": \"array\",\r",
+											"                        \"minItems\": 1,\r",
+											"                        \"maxItems\": 1,\r",
+											"                        \"items\": {\r",
+											"                            \"type\": \"string\",\r",
+											"                            \"const\": \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome\"\r",
+											"                        }\r",
+											"                    }\r",
+											"                },\r",
+											"                \"required\": [\"profile\"]\r",
+											"            },\r",
+											"            \"issue\": {\r",
+											"                \"type\": \"array\",\r",
+											"                \"items\": {\r",
+											"                    \"properties\": {\r",
+											"                        \"id\": {\r",
+											"                            \"type\": \"string\"\r",
+											"                        },\r",
+											"                        \"severity\": {\r",
+											"                            \"type\": \"string\",\r",
+											"                            \"enum\": [\r",
+											"                                \"fatal\",\r",
+											"                                \"error\",\r",
+											"                                \"warning\",\r",
+											"                                \"information\"\r",
+											"                            ]\r",
+											"                        },\r",
+											"                        \"code\": {\r",
+											"                            \"type\": \"string\",\r",
+											"                            \"enum\": [\r",
+											"                                \"invalid\",\r",
+											"                                \"structure\",\r",
+											"                                \"required\",\r",
+											"                                \"value\",\r",
+											"                                \"invariant\",\r",
+											"                                \"security\",\r",
+											"                                \"login\",\r",
+											"                                \"unknown\",\r",
+											"                                \"expired\",\r",
+											"                                \"forbidden\",\r",
+											"                                \"suppressed\",\r",
+											"                                \"processing\",\r",
+											"                                \"not-supported\",\r",
+											"                                \"duplicate\",\r",
+											"                                \"not-found\",\r",
+											"                                \"too-long\",\r",
+											"                                \"code-invalid\",\r",
+											"                                \"extension\",\r",
+											"                                \"too-costly\",\r",
+											"                                \"business-rule\",\r",
+											"                                \"conflict\",\r",
+											"                                \"incomplete\",\r",
+											"                                \"transient\",\r",
+											"                                \"lock-error\",\r",
+											"                                \"no-store\",\r",
+											"                                \"exception\",\r",
+											"                                \"timeout\",\r",
+											"                                \"throttled\",\r",
+											"                                \"informational\",\r",
+											"                            ]\r",
+											"                        },\r",
+											"                        \"details\": {\r",
+											"                            \"type\": \"object\",\r",
+											"                            \"properties\": {\r",
+											"                                \"coding\": {\r",
+											"                                    \"type\": \"array\",\r",
+											"                                    \"minItems\": 1,\r",
+											"                                    \"items\": {\r",
+											"                                        \"properties\": {\r",
+											"                                            \"system\": {\r",
+											"                                                \"type\": \"string\",\r",
+											"                                            },\r",
+											"                                            \"code\": {\r",
+											"                                                \"type\": \"string\",\r",
+											"                                                \"const\" : \"BAD_REQUEST\",\r",
+											"                                            },\r",
+											"                                            \"display\": {\r",
+											"                                                \"type\": \"string\",\r",
+											"                                            }\r",
+											"                                        },\r",
+											"                                        \"required\": [\r",
+											"                                            \"system\",\r",
+											"                                            \"code\",\r",
+											"                                            \"display\"\r",
+											"                                        ]\r",
+											"                                    }\r",
+											"                                }\r",
+											"                            }\r",
+											"                        },\r",
+											"                        \"diagnostics\": {\r",
+											"                            \"type\": \"string\"\r",
+											"                        },\r",
+											"                        \"expression\": {\r",
+											"                            \"type\": \"string\"\r",
+											"                        }\r",
+											"                    }\r",
+											"                },\r",
+											"                \"required\": [\r",
+											"                    \"severity\",\r",
+											"                    \"code\",\r",
+											"                ]\r",
+											"            }\r",
+											"        },\r",
+											"        \"required\": [\r",
+											"            \"resourceType\",\r",
+											"            \"meta\",\r",
+											"            \"issue\"\r",
+											"        ]\r",
+											"    }\r",
+											"    pm.response.to.have.jsonSchema(schema);\r",
+											"});*/"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.\nMirrored back in a response header.\n",
+										"key": "X-Correlation-ID",
+										"value": "{{X-Correlation-ID}}"
+									},
+									{
+										"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
+										"key": "X-Request-ID",
+										"value": "{{X-Request-ID}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json-patch+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/fhir+json; charset=utf-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"op\": \"incorrect\",\r\n  \"path\": \"/status\",\r\n  \"value\": \"cancelled\"\r\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/Task?id={{TaskId}}&patient=HG7865*765",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Task"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{TaskId}}",
+											"description": "(Required) The id of the Task to cancel\n"
+										},
+										{
+											"key": "patient",
+											"value": "HG7865*765",
+											"description": "The NHS number of the patient whose requests you are searching for"
+										}
+									]
+								},
+								"description": "## Overview\n\nUse this endpoint to cancel a current request that has not been actioned yet.\n\nThe content-type for this request must be \"application/json-patch+json\".\n\nThe request must include the following parameter:\n\n* id\n"
+							},
+							"response": []
+						},
+						{
+							"name": "Error: Invalid NHS number check digit test- 400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"//Verify the response status code\r",
+											"pm.test(\"GIVEN I send an incorrect request, WHEN I send the request, THEN the status code response is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"//Verify response header X-Correlation-ID\r",
+											"pm.test(\"GIVEN I provide an X-Correlation-ID in the header, WHEN I send the request, THEN the same X-Correlation-ID is returned in the response header\", function () {\r",
+											"    var XCorrelationID = pm.variables.get(\"X-Correlation-ID\");\r",
+											"    pm.expect(pm.response.headers.get(\"X-Correlation-ID\")).to.eql(XCorrelationID);\r",
+											"});\r",
+											"\r",
+											"//Verify response header X-Request-ID\r",
+											"pm.test(\"GIVEN I provide an X-Request-ID in the header, WHEN I send the request, THEN the same X-Request-ID is returned in the response header\", function () {\r",
+											"    var XRequestID = pm.variables.get(\"X-Request-ID\");\r",
+											"    pm.expect(pm.response.headers.get(\"X-Request-ID\")).to.eql(XRequestID);\r",
+											"});\r",
+											"\r",
+											"//Verify response header content-type\r",
+											"pm.test(\"GIVEN I send a request, WHEN the response is returned, THEN the content-type in the header is set to 'application/fhir+json; charset=utf-8'\", () => {\r",
+											"    pm.expect(pm.response.headers.get('CONTENT-TYPE')).to.eql('application/fhir+json; charset=utf-8')\r",
+											"});\r",
+											"\r",
+											"//Verify response schema\r",
+											"/*pm.test(\"GIVEN I send a MedicationRequest with an ID that doesn't exist, WHEN the response is returned, THEN the json error response corresponds to the required MedicationRequest schema\", () => {\r",
+											"    var schema = {\r",
+											"        \"type\": \"object\",\r",
+											"        \"properties\": {\r",
+											"            \"resourceType\": {\r",
+											"                \"type\": \"string\",\r",
+											"                \"const\": \"OperationOutcome\"\r",
+											"            },\r",
+											"            \"id\": {\r",
+											"                \"type\": \"string\"\r",
+											"            },\r",
+											"            \"meta\": {\r",
+											"                \"type\": \"object\",\r",
+											"                \"properties\": {\r",
+											"                    \"profile\": {\r",
+											"                        \"type\": \"array\",\r",
+											"                        \"minItems\": 1,\r",
+											"                        \"maxItems\": 1,\r",
+											"                        \"items\": {\r",
+											"                            \"type\": \"string\",\r",
+											"                            \"const\": \"https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome\"\r",
+											"                        }\r",
+											"                    }\r",
+											"                },\r",
+											"                \"required\": [\"profile\"]\r",
+											"            },\r",
+											"            \"issue\": {\r",
+											"                \"type\": \"array\",\r",
+											"                \"items\": {\r",
+											"                    \"properties\": {\r",
+											"                        \"id\": {\r",
+											"                            \"type\": \"string\"\r",
+											"                        },\r",
+											"                        \"severity\": {\r",
+											"                            \"type\": \"string\",\r",
+											"                            \"enum\": [\r",
+											"                                \"fatal\",\r",
+											"                                \"error\",\r",
+											"                                \"warning\",\r",
+											"                                \"information\"\r",
+											"                            ]\r",
+											"                        },\r",
+											"                        \"code\": {\r",
+											"                            \"type\": \"string\",\r",
+											"                            \"enum\": [\r",
+											"                                \"invalid\",\r",
+											"                                \"structure\",\r",
+											"                                \"required\",\r",
+											"                                \"value\",\r",
+											"                                \"invariant\",\r",
+											"                                \"security\",\r",
+											"                                \"login\",\r",
+											"                                \"unknown\",\r",
+											"                                \"expired\",\r",
+											"                                \"forbidden\",\r",
+											"                                \"suppressed\",\r",
+											"                                \"processing\",\r",
+											"                                \"not-supported\",\r",
+											"                                \"duplicate\",\r",
+											"                                \"not-found\",\r",
+											"                                \"too-long\",\r",
+											"                                \"code-invalid\",\r",
+											"                                \"extension\",\r",
+											"                                \"too-costly\",\r",
+											"                                \"business-rule\",\r",
+											"                                \"conflict\",\r",
+											"                                \"incomplete\",\r",
+											"                                \"transient\",\r",
+											"                                \"lock-error\",\r",
+											"                                \"no-store\",\r",
+											"                                \"exception\",\r",
+											"                                \"timeout\",\r",
+											"                                \"throttled\",\r",
+											"                                \"informational\",\r",
+											"                            ]\r",
+											"                        },\r",
+											"                        \"details\": {\r",
+											"                            \"type\": \"object\",\r",
+											"                            \"properties\": {\r",
+											"                                \"coding\": {\r",
+											"                                    \"type\": \"array\",\r",
+											"                                    \"minItems\": 1,\r",
+											"                                    \"items\": {\r",
+											"                                        \"properties\": {\r",
+											"                                            \"system\": {\r",
+											"                                                \"type\": \"string\",\r",
+											"                                            },\r",
+											"                                            \"code\": {\r",
+											"                                                \"type\": \"string\",\r",
+											"                                                \"const\" : \"BAD_REQUEST\",\r",
+											"                                            },\r",
+											"                                            \"display\": {\r",
+											"                                                \"type\": \"string\",\r",
+											"                                            }\r",
+											"                                        },\r",
+											"                                        \"required\": [\r",
+											"                                            \"system\",\r",
+											"                                            \"code\",\r",
+											"                                            \"display\"\r",
+											"                                        ]\r",
+											"                                    }\r",
+											"                                }\r",
+											"                            }\r",
+											"                        },\r",
+											"                        \"diagnostics\": {\r",
+											"                            \"type\": \"string\"\r",
+											"                        },\r",
+											"                        \"expression\": {\r",
+											"                            \"type\": \"string\"\r",
+											"                        }\r",
+											"                    }\r",
+											"                },\r",
+											"                \"required\": [\r",
+											"                    \"severity\",\r",
+											"                    \"code\",\r",
+											"                ]\r",
+											"            }\r",
+											"        },\r",
+											"        \"required\": [\r",
+											"            \"resourceType\",\r",
+											"            \"meta\",\r",
+											"            \"issue\"\r",
+											"        ]\r",
+											"    }\r",
+											"    pm.response.to.have.jsonSchema(schema);\r",
+											"});*/"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.\nMirrored back in a response header.\n",
+										"key": "X-Correlation-ID",
+										"value": "{{X-Correlation-ID}}"
+									},
+									{
+										"description": "(Required) A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.\nMust be a universally unique identifier (UUID) (ideally version 4).\n\nMirrored back in a response header.\n\nIf you re-send a failed request, use the same value in this header.\n\nRequired in all environments except sandbox.\n",
+										"key": "X-Request-ID",
+										"value": "{{X-Request-ID}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json-patch+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/fhir+json; charset=utf-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"op\": \"incorrect\",\r\n  \"path\": \"/status\",\r\n  \"value\": \"cancelled\"\r\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/Task?id={{TaskId}}&patient=9658218870",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Task"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{TaskId}}",
+											"description": "(Required) The id of the Task to cancel\n"
+										},
+										{
+											"key": "patient",
+											"value": "9658218870",
+											"description": "The NHS number of the patient whose requests you are searching for"
 										}
 									]
 								},
@@ -20420,7 +21847,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{TaskId}}",
+									"raw": "{{baseUrl}}/Task?id={{TaskId}}&patient={{PatientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -20432,6 +21859,11 @@
 											"key": "id",
 											"value": "{{TaskId}}",
 											"description": "(Required) The id of the Task to cancel\n"
+										},
+										{
+											"key": "patient",
+											"value": "{{PatientId}}",
+											"description": "The NHS number of the patient whose requests you are searching for"
 										}
 									]
 								},
@@ -20644,7 +22076,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/Task?id={{TaskId}}",
+									"raw": "{{baseUrl}}/Task?id={{TaskId}}&patient={{PatientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -20656,6 +22088,11 @@
 											"key": "id",
 											"value": "{{TaskId}}",
 											"description": "(Required) The id of the Task to cancel\n"
+										},
+										{
+											"key": "patient",
+											"value": "{{PatientId}}",
+											"description": "The NHS number of the patient whose requests you are searching for"
 										}
 									]
 								},
@@ -20769,7 +22206,8 @@
 									"var practitionerRoleId = reference.substr(17, 36)\r",
 									"pm.collectionVariables.set('userFlowPractitionerRoleId', practitionerRoleId)"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -20778,7 +22216,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -20821,13 +22260,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/MedicationRequest/{{userFlowMedicationRequestId}}",
+							"raw": "{{baseUrl}}/MedicationRequest/{{userFlowMedicationRequestId}}?patient={{PatientId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"MedicationRequest",
 								"{{userFlowMedicationRequestId}}"
+							],
+							"query": [
+								{
+									"key": "patient",
+									"value": "{{PatientId}}",
+									"description": "The NHS number of the patient whose requests you are searching for"
+								}
 							]
 						},
 						"description": "Use this endpoint to get specific MedicationRequests.\n\nThe request must include the following parameter:\n\n* id\n"
@@ -20856,7 +22302,8 @@
 									"    pm.expect(jsonData.id).to.eql(practitionerId);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -20865,7 +22312,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -20888,13 +22336,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/PractionerRole/{{userFlowPractitionerRoleId}}",
+							"raw": "{{baseUrl}}/PractionerRole/{{userFlowPractitionerRoleId}}?patient={{PatientId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"PractionerRole",
 								"{{userFlowPractitionerRoleId}}"
+							],
+							"query": [
+								{
+									"key": "patient",
+									"value": "{{PatientId}}",
+									"description": "The NHS number of the patient whose requests you are searching for"
+								}
 							]
 						},
 						"description": "Use this endpoint to get details of practitioners issuing previous prescriptions.\nThe request must include the following parameter:\n* id\n"
@@ -21010,7 +22465,8 @@
 									"    })\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -21019,7 +22475,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -21042,7 +22499,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/Task?id={{userFlowTaskId}}",
+							"raw": "{{baseUrl}}/Task?id={{userFlowTaskId}}&patient={{PatientId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -21053,6 +22510,11 @@
 								{
 									"key": "id",
 									"value": "{{userFlowTaskId}}"
+								},
+								{
+									"key": "patient",
+									"value": "{{PatientId}}",
+									"description": "The NHS number of the patient whose requests you are searching for"
 								}
 							]
 						},
@@ -21075,7 +22537,8 @@
 									"    pm.response.to.have.status(200);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -21084,7 +22547,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -21121,7 +22585,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/Task?id={{userFlowTaskId}}",
+							"raw": "{{baseUrl}}/Task?id={{userFlowTaskId}}&patient={{PatientId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -21133,6 +22597,11 @@
 									"key": "id",
 									"value": "{{userFlowTaskId}}",
 									"description": "(Required) The id of the Task to cancel\n"
+								},
+								{
+									"key": "patient",
+									"value": "{{PatientId}}",
+									"description": "The NHS number of the patient whose requests you are searching for"
 								}
 							]
 						},
