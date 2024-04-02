@@ -485,7 +485,8 @@
 													"    }\r",
 													"});"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -494,31 +495,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "oauth2",
-											"oauth2": [
-												{
-													"key": "useBrowser",
-													"value": true,
-													"type": "boolean"
-												},
-												{
-													"key": "tokenName",
-													"value": "Token1",
-													"type": "string"
-												},
-												{
-													"key": "addTokenTo",
-													"value": "header",
-													"type": "string"
-												}
-											]
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -721,7 +703,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -730,14 +713,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -936,7 +917,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -945,14 +927,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -1151,7 +1131,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -1160,14 +1141,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -1366,7 +1345,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -1375,14 +1355,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -1580,7 +1558,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -1589,14 +1568,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -1794,7 +1771,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -1803,14 +1781,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -2008,7 +1984,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -2017,14 +1994,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -2371,7 +2346,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -2380,14 +2356,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -2585,7 +2559,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -2594,14 +2569,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -2800,7 +2773,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -2809,14 +2783,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -3015,7 +2987,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -3024,14 +2997,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -3230,7 +3201,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -3239,14 +3211,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -3445,7 +3415,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -3454,14 +3425,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -3659,7 +3628,8 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});*/"
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										},
 										{
@@ -3668,14 +3638,12 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
 									"request": {
-										"auth": {
-											"type": "noauth"
-										},
 										"method": "GET",
 										"header": [
 											{
@@ -4170,7 +4138,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -4179,14 +4148,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -4379,7 +4346,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -4388,14 +4356,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -4587,7 +4553,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -4596,14 +4563,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -4795,7 +4760,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -4804,14 +4770,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -5003,7 +4967,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -5012,14 +4977,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -5211,7 +5174,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -5220,14 +5184,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -5425,7 +5387,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -5434,14 +5397,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -6191,7 +6152,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -6200,14 +6162,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -6400,7 +6360,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -6409,14 +6370,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -6608,7 +6567,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -6617,14 +6577,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -6816,7 +6774,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -6825,14 +6784,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -7024,7 +6981,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -7033,14 +6991,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -7232,7 +7188,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -7241,14 +7198,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -7446,7 +7401,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -7455,14 +7411,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -7660,7 +7614,8 @@
 															"    pm.response.to.have.jsonSchema(schema);\r",
 															"});*/"
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												},
 												{
@@ -7669,14 +7624,12 @@
 														"exec": [
 															""
 														],
-														"type": "text/javascript"
+														"type": "text/javascript",
+														"packages": {}
 													}
 												}
 											],
 											"request": {
-												"auth": {
-													"type": "noauth"
-												},
 												"method": "GET",
 												"header": [
 													{
@@ -22222,26 +22175,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "oauth2",
-							"oauth2": [
-								{
-									"key": "useBrowser",
-									"value": true,
-									"type": "boolean"
-								},
-								{
-									"key": "tokenName",
-									"value": "Token1",
-									"type": "string"
-								},
-								{
-									"key": "addTokenTo",
-									"value": "header",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -22612,6 +22545,9 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer"
+	},
 	"event": [
 		{
 			"listen": "prerequest",
