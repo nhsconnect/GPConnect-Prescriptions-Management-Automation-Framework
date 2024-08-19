@@ -11,3 +11,4 @@ Updated the changes in the collection and uploaded latest version2.1
 01/07/24 - Asper Emile's email(dt.01/07/24)- collection has been updated and uploaded latest version.
 13/08/24 - As per the proposed spec changes and Emile's email(dt.02/08/24), updates have been made to the Postman collection, and the latest collection has been uploaded. 
 16/08/24 - Asper Emile's email(dt.14/08/24)- collection has been updated and uploaded latest version.
+19/08/24 - Asper Emile's email(dt.16/08/24)- collection has been updated and uploaded latest version.
